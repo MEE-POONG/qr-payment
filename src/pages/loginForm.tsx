@@ -4,11 +4,11 @@ import Link from "next/link";
 export default function LoginForm() {
     return (
         <Layout>
-            <div className="conrainer ">
+            <div className="flex justify-center md:items-center md:p-24">
                 {/* <h2 className="text-center font-black text-2xl">ระบบตรวจสอบการโอนเงิน</h2> */}
                 <div className="bg-white p-7 max-w-md mx-auto rounded-md relative mt-20  shadow-md " >
                     <div className="bg-black rounded-full overflow-hidden w-20 h-20 absolute -top-10 shadow-md ">
-                        <img className="w-full h-full absolute" src="https://i.pinimg.com/564x/b1/7e/c8/b17ec8045c7cf08566c50d6e0e506158.jpg" alt="" />
+                        <img className="w-full h-full absolute" src="w-12 h-12" alt="" />
                     </div>
                     <div className="mt-10">
                         <p>Username:</p>

@@ -12,7 +12,7 @@ export default function Layout({
 }) {
   return (
     <section className={`${sriracha.className}`}>
-      <main className={`min-h-screen flex justify-center md:items-center px-5 py-14 md:p-24`}>
+      <main className={`min-h-screen px-5 py-14 md:p-24`}>
         {children}
       </main>
     </section>

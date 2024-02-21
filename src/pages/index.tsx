@@ -9,6 +9,9 @@ export default function Home() {
     <Layout>
       <div>
         <h1>Hi</h1>
+     
+       
+        
       </div>
     </Layout>
   );
