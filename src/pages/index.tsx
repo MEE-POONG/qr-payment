@@ -1,18 +1,12 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
-import Layout from "@/components/layout";
+import DataCusForm from "./dataCusForm";
 
-const inter = Inter({ subsets: ["latin"] });
+const Home: React.FC = () => {
 
-export default function Home() {
   return (
-    <Layout>
-      <div>
-        <h1>Hi</h1>
-     
-       
-        
-      </div>
-    </Layout>
+    <div className="min-h-screen px-5 ">
+      <DataCusForm/>
+    </div>
   );
 }
+export default Home;
