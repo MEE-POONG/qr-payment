@@ -24,9 +24,9 @@ const TabsMenu: React.FC<{ tabs: Tab[] }> = ({ tabs }) => {
             key={index}
             onClick={() => handleTabClick(index)}
             className={`${index === activeTab
-                ? 'bg-gray-800 text-white'
-                : 'bg-gray-200 text-gray-800'
-              } px-4 py-2 mr-4 rounded-md focus:outline-none`}
+                ? 'border-b-2 border-purple-800 text-purple-800'
+                : ' text-gray-800'
+              } px-4 py-2 mr-4 focus:outline-none`}
           >
             {tab.label}
           </button>

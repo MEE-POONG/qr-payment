@@ -16,7 +16,7 @@ export default function LoginForm() {
                         <p className="mt-5">Password:</p>
                         <input type="text" className="text-base p-1.5 w-full focus:ring-0 border-b" />
                         <button type="submit" className="bg-purple-400 hover:bg-purple-500 w-full rounded-2xl mt-9 p-1 drop-shadow-lg">
-                            <Link href='/' className="font-bold text-purple-100">Login</Link>
+                            <Link href='./Dashboard' className="font-bold text-purple-100">Login</Link>
                         </button>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+import React from "react";
 import TabsMenu from "../../components/TabsMenu";
 import Layout from "../../components/layout";
 import PaymentList from "../../components/management/PaymentList";
@@ -14,8 +15,10 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <div className="mt-10">
+      <div className="mt-10 container mx-auto">
+        <div className="">
         <TabsMenu tabs={tabs}/>
+        </div>
       </div>
     </Layout>
   );
