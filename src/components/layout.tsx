@@ -1,7 +1,5 @@
 import { Sriracha } from 'next/font/google'
-import Navbar from './Navbar'
 import LogoutButton from './LogoutButton'
-import MenuButton from './TabsMenu'
 
 
 
@@ -17,7 +15,7 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <section className={`${sriracha.className}`}>
+    <section>
       {/* <Navbar /> */}
      
       <LogoutButton />
