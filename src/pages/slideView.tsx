@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Slide from '../components/Slide';
 import Slider from '@/components/Slider';
 
 
