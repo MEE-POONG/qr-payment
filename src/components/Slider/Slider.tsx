@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { imgslide } from './datatest';
+import { imgslide } from '../datatest';
 import Image from 'next/image';
-import DEscription from './Description';
+import DEscription from '../Description';
 
 
 const Slider = () => {
