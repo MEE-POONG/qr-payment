@@ -3,6 +3,8 @@ import { imgslide } from '../datatest';
 import Image from 'next/image';
 import DEscription from '../Description';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import GalleryIndex from '../Gallery';
+import GalleryTwo from '../Gallery/two';
 
 const SliderClothSquare: React.FC = () => {
 
@@ -19,14 +21,14 @@ const SliderClothSquare: React.FC = () => {
             : setActiveImage(activeImage - 1)
     };
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            clickNext();
-        }, 5000);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [activeImage]);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         clickNext();
+    //     }, 5000);
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, [activeImage]);
 
     return (
         <div className='w-screen h-screen'>
@@ -37,7 +39,8 @@ const SliderClothSquare: React.FC = () => {
                         : `hidden`
                         }`}
                         key={idx}>
-                            
+                        {/* <GalleryIndex /> */}
+                        <GalleryTwo />
                         {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div className="grid gap-4">
                                 <div>

@@ -17,11 +17,10 @@ const DEscription = ({ clickPrev, clickNext, activeImgIndex }: Props) => {
             </div>
             {imgslide.map((elem, idx) => (
                 <div
-                    className={` ${
-                        idx === activeImgIndex
+                    className={` ${idx === activeImgIndex
                             ? `block w-full h-[80vh] object-cover transition-all duration-500 ease-in-out pl-10`
                             : `hidden`
-                    }`}
+                        }`}
                     key={idx}
                 >
                     <div className='py-16 font-extrabold text-3xl'>{elem.name}</div>
