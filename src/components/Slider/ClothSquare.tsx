@@ -38,7 +38,9 @@ const SliderClothSquare: React.FC = () => {
                         : `hidden`
                         }`}
                         key={idx}>
+                        {/* GalleryTemplant 1 */}
                         <GalleryIndex />
+                        {/* GalleryTemplant 2 */}
                         {/* <GalleryTwo /> */}
                     </div>
                 ))}

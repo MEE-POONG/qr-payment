@@ -6,11 +6,17 @@ import Image from 'next/image';
 const DarkImageBackground = () => {
     return (
         <div className="w-screen h-screen absolute z-[-1] ">
-            <Image 
+            {/* <Image
                 src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/1ceeaa24-0a52-4288-a124-bcfd8f35ef00/w2xl"
-                layout="fill"
-                objectFit="cover"
-                alt="" />
+                width={1000} height={1000}
+                style={{ objectFit: 'cover' }}
+
+                alt="" /> */}
+            <img
+                src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/1ceeaa24-0a52-4288-a124-bcfd8f35ef00/w2xl"
+                alt="Picture of the author"
+                className='object-cover w-screen h-screen'
+            />
             {/* The dark image background */}
             {/* <img
                 src={"https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/1ceeaa24-0a52-4288-a124-bcfd8f35ef00/w2xl"} // The path to your dark image

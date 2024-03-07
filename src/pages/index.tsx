@@ -11,7 +11,9 @@ const Home: React.FC = () => {
   return (
     <div className="relative w-screen h-screen ">
       <DarkImageBackground />
+      {/* GalleryTemplate 1 */}
       {/* <SliderIndex /> */}
+      {/* GalleryTemplate 2 */}
       <SliderClothSquare />
       <div className="absolute bg-white p-2 bottom-0 m-4 text-center">
         <p className="text-2xl font-bold text-pink-600 drop-shadow-lg">Scan Me</p>
