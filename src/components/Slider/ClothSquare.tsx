@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { imgslide } from '../../data/datatest';
-import Image from 'next/image';
-import DEscription from '../Description';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import GalleryIndex from '../Gallery';
 import GalleryTwo from '../Gallery/two';
-import DarkImageBackground from '../BG';
 
 const SliderClothSquare: React.FC = () => {
 
@@ -30,6 +27,7 @@ const SliderClothSquare: React.FC = () => {
     //         clearTimeout(timer);
     //     };
     // }, [activeImage]);
+    // https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/750
 
     return (
         <div className='w-screen h-screen'>
