@@ -17,7 +17,7 @@ const GalleryIndex: React.FC = () => {
                         <img
                             alt="gallery"
                             className="block h-full w-full rounded-lg object-cover object-center"
-                            src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" />
+                            src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(71).webp" />
                     </div>
                 </div>
                 <div className="flex w-1/2 flex-wrap">
@@ -31,7 +31,7 @@ const GalleryIndex: React.FC = () => {
                         <img
                             alt="gallery"
                             className="block h-full w-full rounded-lg object-cover object-center"
-                            src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp" />
+                            src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" />
                     </div>
                 </div>
                 <div className=" w-full h-auto flex bg-white rounded-lg p-4">

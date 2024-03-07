@@ -1,0 +1,1 @@
+.shine-wrapper:hover{background-image:linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%),url("/path/to/your/dark-image.jpg")}.shine{animation:shine-effect 2s}.dark-image{transition:opacity .5s ease-in-out}.group:hover .dark-image{opacity:.7}@keyframes shine-effect{from{background-position:-500px}to{background-position:1500px}}

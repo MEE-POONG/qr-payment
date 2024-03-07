@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { imgslide } from '../datatest';
+import { imgslide } from '../../data/datatest';
 import Image from 'next/image';
 import DEscription from '../Description';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import GalleryIndex from '../Gallery';
 import GalleryTwo from '../Gallery/two';
+import DarkImageBackground from '../BG';
 
 const SliderClothSquare: React.FC = () => {
 
@@ -41,58 +42,6 @@ const SliderClothSquare: React.FC = () => {
                         key={idx}>
                         <GalleryIndex />
                         {/* <GalleryTwo /> */}
-                        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div className="grid gap-4">
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                            </div>
-                            <div className="grid gap-4">
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                            </div>
-                            <div className="grid gap-4">
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                            </div>
-                            <div className="grid gap-4">
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                                <div>
-                                    <Image className="h-auto max-w-full rounded-lg" src={pic.src} width={400} height={400} alt="" />
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <Image
-                            src={pic.src}
-                            alt=''
-                            width={400} height={400}
-                            className='w-full h-full'
-                        /> */}
                     </div>
                 ))}
                 <button onClick={clickNext} className='flex text-black items-center absolute top-0 left-0 w-max h-screen cursor-pointer text-4xl opacity-50 hover:opacity-100 drop-shadow'>

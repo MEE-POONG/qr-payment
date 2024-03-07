@@ -1,5 +1,5 @@
 import React from 'react';
-import { imgslide } from './datatest';
+import { imgslide } from '../data/datatest';
 import Image from 'next/image';
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi';
 
