@@ -1,7 +1,25 @@
+type ProfileModal = {
+    id: string;
+    name: string;
+    caption: string;
+    facebook: string;
+    instagram: string;
+    GalleryTemplate: string;
+    price: string;
+    checkPrice: string;
+};
+
+type ImageDataModal = {
+    id: string;
+    postProfile: string;
+    src: string;
+};
+
 export const GalleryTemplate = [
     { id: "1", countImg: "4" },
     { id: "2", countImg: "4" },
 ];
+
 export const postProfile = [
     { id: "1", name: "หมวย แซบปาก", caption: "จะกินข้าวหรือกินเรา ?", facebook: "muay", instagram: "w.a.x1", GalleryTemplate: "1", price: "99", checkPrice: "waiting" },
     { id: "2", name: "สปอย แซบปาก", caption: "จะกินข้าวหรือกินเรา ?", facebook: "spoy", instagram: "w.a.x1", GalleryTemplate: "2", price: "99", checkPrice: "succeed" },
@@ -9,7 +27,9 @@ export const postProfile = [
     { id: "4", name: "โอ๊ต แซบปาก", caption: "จะกินข้าวหรือกินเรา ?", facebook: "spoy", instagram: "w.a.x1", GalleryTemplate: "1", price: "99", checkPrice: "succeed" },
     { id: "5", name: "เอส แซบปาก", caption: "จะกินข้าวหรือกินเรา ?", facebook: "spoy", instagram: "w.a.x1", GalleryTemplate: "1", price: "99", checkPrice: "waiting" },
     { id: "6", name: "พลอย แซบปาก", caption: "จะกินข้าวหรือกินเรา ?", facebook: "spoy", instagram: "w.a.x1", GalleryTemplate: "2", price: "99", checkPrice: "succeed" },
+    { id: "7", name: "พลอย แซบ", caption: "จะกินข้าวหรือกินเรา ?", facebook: "spoy", instagram: "w.a.x1", GalleryTemplate: "3", price: "99", checkPrice: "succeed" },
 ];
+
 export const ImageData = [
     { id: "1", postProfile: "1", src: "https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp", },
     { id: "2", postProfile: "1", src: "https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp", },

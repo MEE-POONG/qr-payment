@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model ProfileData {
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  caption         String?
+  facebook        String?
+  instagram       String?
+  galleryTemplate Int?
+  price           String?
+  checkPrice      String?
+  ImageData       ImageData[]
+  Payment         Payment[]
+}
+
+model ImageData {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  src           String?
+  profile       ProfileData? @relation(fields: [postProfileID], references: [id])
+  postProfileID String?      @db.ObjectId
+}
+
+model Payment {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  amount        Float?
+  status        String?
+  createdAt     DateTime     @default(now())
+  profile       ProfileData? @relation(fields: [postProfileID], references: [id])
+  postProfileID String?      @db.ObjectId
+}
+
+model GalleryTemplate {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  countImg String?
+}
