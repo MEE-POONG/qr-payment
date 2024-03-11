@@ -42,7 +42,7 @@ model ImageData {
 model Payment {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
   amount        Float?
-  status        String?
+  status        String?      @default("pending")
   createdAt     DateTime?    @default(now())
   updatedAt     DateTime?    @updatedAt
   profile       ProfileData? @relation(fields: [postProfileID], references: [id])
