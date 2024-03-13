@@ -1,6 +1,11 @@
+import GalleryIndex from "@/components/Gallery";
+import GalleryIndexEdit from "@/components/Gallery/indexEdit";
+import GalleryTwo from "@/components/Gallery/two";
+
 export const GalleryTemplate = [
-    { id: "1", countImg: "4" },
-    { id: "2", countImg: "4" },
+    // { id: "1", countImg: "4", Component: GalleryIndex },
+    // { id: "2", countImg: "4", Component: GalleryTwo },
+    { id: "", countImg: "4", Component: GalleryIndexEdit },
 ];
 
 export const postProfile = [
