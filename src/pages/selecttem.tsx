@@ -53,6 +53,7 @@ const SelectTem: React.FC = () => {
           </div>
         </div>
         <GalleryIndex />
+        <GalleryIndex />
       </div>
     </div>
   );
