@@ -1,9 +1,9 @@
 import React from 'react';
-import LayoutTem from './layoutTem';
+import BoxText from './BoxText';
 
-const GalleryIndex: React.FC = () => {
+const GalleryThree: React.FC = () => {
     return (
-        <LayoutTem>
+        <div className="h-full flex flex-col w-full lg:w-[60%] py-2 px-1">
             <div className="w-full flex-grow flex bg-blue-100 rounded-lg p-4 h-[100px] ">
                 <div className="flex w-1/2 flex-wrap">
                     <div className="w-full h-[60%] p-1 md:p-2 border-1 border relative">
@@ -38,8 +38,9 @@ const GalleryIndex: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </LayoutTem>
+            <BoxText />
 
+        </div>
     )
 }
-export default GalleryIndex;
+export default GalleryThree;

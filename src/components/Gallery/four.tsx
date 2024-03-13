@@ -1,7 +1,8 @@
 import React from 'react';
+import BoxText from './BoxText';
 import LayoutTem from './layoutTem';
 
-const GalleryIndex: React.FC = () => {
+const GalleryFour: React.FC = () => {
     return (
         <LayoutTem>
             <div className="w-full flex-grow flex bg-blue-100 rounded-lg p-4 h-[100px] ">
@@ -42,4 +43,4 @@ const GalleryIndex: React.FC = () => {
 
     )
 }
-export default GalleryIndex;
+export default GalleryFour;
