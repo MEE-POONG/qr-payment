@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { imgslide } from '../../data/datatest';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import GalleryIndex from '../Gallery';
-import GalleryTwo from '../Gallery/two';
 import { ImageData, postProfile } from '@/data/postProfile';
 
 // Add a props interface to define the expected props and their types
@@ -45,18 +44,13 @@ const SliderClothSquare: React.FC<SliderClothSquareProps> = ({ auto = true }) =>
                     let GalleryComponent = null;
 
                     switch (list.GalleryTemplate) {
-                        case "1":
-                            GalleryComponent = <GalleryIndex dataList={{
-                                ...list,
-                                images: ImageData
-                            }} />;
-                            break;
-                        case "2":
-                            GalleryComponent = <GalleryTwo dataList={{
-                                ...list,
-                                images: ImageData
-                            }} />;
-                            break;
+                        // case "1":
+                        //     GalleryComponent = <GalleryIndex dataList={{
+                        //         ...list,
+                        //         images: ImageData
+                        //     }} />;
+                        //     break;
+         
                         default:
                             GalleryComponent = <div>No Gallery Found</div>;
                     }

@@ -1,6 +1,5 @@
 import DarkImageBackground from "@/components/BG";
-import GalleryFour from "@/components/Gallery/four";
-import GalleryThree from "@/components/Gallery/three";
+import GalleryIndex from "@/components/Gallery";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const SelectTem: React.FC = () => {
@@ -53,17 +52,8 @@ const SelectTem: React.FC = () => {
             </div>
           </div>
         </div>
-        {/* <GalleryThree /> */}
-        <GalleryFour />
-
+        <GalleryIndex />
       </div>
-
-
-
-      {/* <div className="absolute bg-white p-2 bottom-0 m-4 text-center">
-        <p className="text-2xl font-bold text-pink-600 drop-shadow-lg">Scan Me</p>
-        <Image src='/images/qrcode.png' width={100} height={100} alt="" className="mx-auto w-44" />
-      </div> */}
     </div>
   );
 }

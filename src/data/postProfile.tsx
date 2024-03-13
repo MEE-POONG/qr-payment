@@ -1,5 +1,4 @@
 import GalleryIndex from "@/components/Gallery";
-import GalleryTwo from "@/components/Gallery/two";
 
 export const GalleryTemplate = [
     // { id: "1", countImg: "4", Component: GalleryIndex },
