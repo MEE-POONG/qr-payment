@@ -18,3 +18,13 @@ const Payment: React.FC = () => {
   );
 }
 export default Payment;
+
+// Pending
+// Processing
+// Completed
+// Failed
+// Cancelled
+// Refunded
+// Charged Back
+// Authorized
+// Voidedกร
