@@ -1,20 +1,3 @@
-type ProfileModal = {
-    id: string;
-    name: string;
-    caption: string;
-    facebook: string;
-    instagram: string;
-    GalleryTemplate: string;
-    price: string;
-    checkPrice: string;
-};
-
-type ImageDataModal = {
-    id: string;
-    postProfile: string;
-    src: string;
-};
-
 export const GalleryTemplate = [
     { id: "1", countImg: "4" },
     { id: "2", countImg: "4" },

@@ -5,30 +5,38 @@ import GalleryIndex from '../Gallery';
 import GalleryTwo from '../Gallery/two';
 import { ImageData, postProfile } from '@/data/postProfile';
 
-const SliderClothSquare: React.FC = () => {
+// Add a props interface to define the expected props and their types
+interface SliderClothSquareProps {
+  auto?: boolean; // auto is optional and defaults to true if not provided
+}
+
+// Destructure auto from props, providing a default value of true
+const SliderClothSquare: React.FC<SliderClothSquareProps> = ({ auto = true }) => {
 
     const [activeImage, setActiveImage] = useState(0);
 
     const clickNext = () => {
         activeImage === imgslide.length - 1
             ? setActiveImage(0)
-            : setActiveImage(activeImage + 1)
+            : setActiveImage(activeImage + 1);
     };
     const clickPrev = () => {
         activeImage === 0
             ? setActiveImage(imgslide.length - 1)
-            : setActiveImage(activeImage - 1)
+            : setActiveImage(activeImage - 1);
     };
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            clickNext();
-        }, 5000);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [activeImage]);
-    // https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/750
+        // Only set up the auto-slide if auto is true
+        if (auto) {
+            const timer = setTimeout(() => {
+                clickNext();
+            }, 5000);
+            return () => {
+                clearTimeout(timer);
+            };
+        }
+    }, [activeImage, auto]); // Include auto in the dependency array
 
     return (
         <div className='w-screen h-screen'>
@@ -60,15 +68,6 @@ const SliderClothSquare: React.FC = () => {
                     );
                 })}
 
-                {/* {imgslide.map((pic, idx) => (
-                    <div className={` ${idx === activeImage
-                        ? `block w-full h-screen object-cover transition-all duration-500 ease-in-out`
-                        : `hidden`
-                        }`}
-                        key={idx}>
-                        <GalleryIndex />
-                    </div>
-                ))} */}
                 <button onClick={clickNext} className='flex text-black items-center absolute top-0 left-0 w-max h-screen cursor-pointer text-4xl opacity-50 hover:opacity-100 drop-shadow'>
                     <FaChevronLeft className='' />
                 </button>
@@ -76,13 +75,8 @@ const SliderClothSquare: React.FC = () => {
                     <FaChevronRight />
                 </button>
             </div>
-            {/* <DEscription
-                activeImgIndex={activeImage}
-                clickNext={clickNext}
-                clickPrev={clickPrev}
-            /> */}
-            {/* pev next */}
         </div>
-    )
-}
+    );
+};
+
 export default SliderClothSquare;

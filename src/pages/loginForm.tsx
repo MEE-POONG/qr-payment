@@ -5,7 +5,6 @@ export default function LoginForm() {
     return (
         <Layout>
             <div className="flex justify-center md:items-center md:p-24">
-                {/* <h2 className="text-center font-black text-2xl">ระบบตรวจสอบการโอนเงิน</h2> */}
                 <div className="bg-white p-7 max-w-md mx-auto rounded-md relative mt-20  shadow-md " >
                     <div className="bg-black rounded-full overflow-hidden w-20 h-20 absolute -top-10 shadow-md ">
                         <img className="w-full h-full absolute" src="w-12 h-12" alt="" />
