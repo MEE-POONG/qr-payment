@@ -1,9 +1,25 @@
+import React, { useState } from 'react';
 import DarkImageBackground from "@/components/BG";
 import GalleryIndex from "@/components/Gallery";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import GalleryTwo from '@/components/Gallery/two';
 
 const SelectTem: React.FC = () => {
+  // State to track the current gallery template index
+  const [currentTemIndex, setCurrentTemIndex] = useState(0);
 
+  // An array of gallery components for demonstration
+  const galleryTemplates = [<GalleryIndex />, <GalleryTwo />]; // Add more templates as needed
+
+  // Function to navigate to the next template
+  const nextTemplate = () => {
+    setCurrentTemIndex((prevIndex) => (prevIndex + 1) % galleryTemplates.length);
+  };
+
+  // Function to navigate to the previous template
+  const prevTemplate = () => {
+    setCurrentTemIndex((prevIndex) => (prevIndex - 1 + galleryTemplates.length) % galleryTemplates.length);
+  };
   return (
     <div className="relative w-screen h-screen ">
       <DarkImageBackground />
@@ -44,16 +60,21 @@ const SelectTem: React.FC = () => {
             </div>
             <div className='mb-2'>
               <span className="block text-lg font-medium text-slate-700 ">เลือกเทมเพลต</span>
-              <div className='flex w-full h-max justify-center text-3xl'>
-                <FaChevronLeft />
-                <div>aaa</div>
-                <FaChevronRight />
+              <div id="select_gallery" className='flex w-full h-max justify-center text-3xl'>
+                <button onClick={prevTemplate} className="p-4">
+                  <FaChevronLeft />
+                </button>
+                <div className="flex-grow text-center">
+                 Tem {currentTemIndex + 1}
+                </div>
+                <button onClick={nextTemplate} className="p-4">
+                  <FaChevronRight />
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <GalleryIndex />
-        <GalleryIndex />
+        {galleryTemplates[currentTemIndex]}
       </div>
     </div>
   );
