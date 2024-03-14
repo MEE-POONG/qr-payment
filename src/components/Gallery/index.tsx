@@ -1,9 +1,10 @@
 import React from 'react';
 import LayoutTem from './LayoutTem';
+import BoxText from './BoxText';
 
 const GalleryIndex: React.FC = () => {
+    
     return (
-        <LayoutTem>
             <div className="w-full flex-grow flex bg-blue-100 rounded-lg p-4 h-[100px] ">
                 <div className="flex w-1/2 flex-wrap">
                     <div className="w-full h-[60%] p-1 md:p-2 border-1 border relative">
@@ -38,7 +39,6 @@ const GalleryIndex: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </LayoutTem>
 
     )
 }
