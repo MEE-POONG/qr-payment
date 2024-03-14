@@ -18,9 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case 'POST':
             try {
-                const { src, postProfileID } = req.body;
+                const { number, src, postProfileID } = req.body;
                 const image = await prisma.imageData.create({
                     data: {
+                        number,
                         src,
                         postProfileID
                     },

@@ -1,5 +1,5 @@
 import React from 'react';
-import LayoutTem from './layoutTem';
+import LayoutTem from './LayoutTem';
 
 const GalleryTwo: React.FC = () => {
     return (
