@@ -3,7 +3,6 @@ import DarkImageBackground from "@/components/BG";
 import GalleryIndex from "@/components/Gallery";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import GalleryTwo from '@/components/Gallery/two';
-import { FaFacebook, FaInstagram, FaLine } from 'react-icons/fa';
 import BoxTextTwo from './BoxTextTwo';
 import BoxTextOne from './BoxTextOne';
 const GallerySelect: React.FC = () => {
