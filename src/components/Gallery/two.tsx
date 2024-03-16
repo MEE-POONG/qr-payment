@@ -2,7 +2,7 @@ import React from 'react';
 
 const GalleryTwo: React.FC = () => {
     return (
-        <div className="w-full flex-grow flex bg-blue-100 rounded-lg p-4 h-[100px] ">
+        <div className="w-full flex-grow flex bg-white rounded-lg p-4 h-[100px] ">
             <div className="flex w-1/2 flex-wrap">
                 <div className="w-full h-[60%] p-1 md:p-2 border-1 border relative">
                     <span className='absolute top-2/4 left-2/4 translate-y-[-50%] translate-x-[-50%] font-bold'>เลือกรูป</span>

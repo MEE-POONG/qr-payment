@@ -4,7 +4,8 @@ import GalleryIndex from "@/components/Gallery";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import GalleryTwo from '@/components/Gallery/two';
 import { FaFacebook, FaInstagram, FaLine } from 'react-icons/fa';
-import BoxText from './BoxText';
+import BoxTextTwo from './BoxTextTwo';
+import BoxTextOne from './BoxTextOne';
 const GallerySelect: React.FC = () => {
     const [currentTemIndex, setCurrentTemIndex] = useState(0);
 
@@ -36,7 +37,7 @@ const GallerySelect: React.FC = () => {
             <DarkImageBackground />
             <div className='container m-auto flex h-full flex-wrap'>
                 <div className="h-auto flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 ">
-                    <div className="w-full flex-grow bg-blue-100 rounded-lg p-4 h-max ">
+                    <div className="w-full flex-grow bg-white rounded-lg p-4 h-max ">
                         {Object.keys(userInfo).map((key) => {
                             const safeKey = key as keyof typeof userInfo; // Correctly type 'key' as a key of 'userInfo'
                             return (
@@ -66,7 +67,8 @@ const GallerySelect: React.FC = () => {
                 </div>
                 <div className="h-full flex flex-col w-full lg:w-[60%] py-2 px-1">
                     {galleryTemplates[currentTemIndex]}
-                    <BoxText data={userInfo} />
+                    {/* <BoxTextOne data={userInfo}/> */}
+                    <BoxTextTwo data={userInfo}/>
                 </div>
             </div>
         </>
