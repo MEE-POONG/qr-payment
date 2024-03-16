@@ -17,6 +17,7 @@ const GallerySelect: React.FC = () => {
         line: '',
         caption: ''
     });
+    const [galleryList, setGalleryList] = useState({});
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
