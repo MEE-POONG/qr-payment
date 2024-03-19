@@ -2,15 +2,16 @@ import { GalleryTemData } from '@/data/gallery';
 import React, { useEffect, useState } from 'react';
 
 interface GalleryProps {
-    mode: 'edit' | 'view'; 
+    mode: 'edit' | 'view';
+    selectTem: number;
 }
 
-const GalleryIndex: React.FC<GalleryProps> = ({ mode }) => {
+const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem }) => {
     const [selectedImages, setSelectedImages] = useState<string[]>(Array(4).fill(""));
 
     useEffect(() => {
-        console.log(selectedImages);
-    }, [selectedImages]);
+        console.log("selectTem : ", selectTem);
+    }, [selectTem]);
 
     const handleFileChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -21,7 +22,7 @@ const GalleryIndex: React.FC<GalleryProps> = ({ mode }) => {
         }
     };
 
-    const selectedTemplate = GalleryTemData.find(template => template.tem === "4");
+    const selectedTemplate = GalleryTemData.find(template => template.tem === selectTem);
 
     return (
         <div className="w-full flex-grow flex rounded-lg h-[100px] bg-white">

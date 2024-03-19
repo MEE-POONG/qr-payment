@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import DarkImageBackground from "@/components/BG";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import BoxTextTwo from './BoxTextTwo';
-import BoxTextOne from './BoxTextOne';
 import GalleryIndex from "@/components/Gallery";
-import GalleryTwo from '@/components/Gallery/two';
-import GalleryThree from '@/components/Gallery/three';
-import GalleryFour from '@/components/Gallery/four';
+import { GalleryTemData } from '@/data/gallery';
 const GallerySelect: React.FC = () => {
     const [currentTemIndex, setCurrentTemIndex] = useState(0);
 
@@ -17,25 +14,20 @@ const GallerySelect: React.FC = () => {
         line: '',
         caption: ''
     });
-    const [galleryList, setGalleryList] = useState({});
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setUserInfo(prevInfo => ({ ...prevInfo, [id]: value }));
     };
 
-    const galleryTemplates = [
-        <GalleryIndex mode={'edit'} />,
-        <GalleryTwo mode={'edit'} />,
-        <GalleryThree mode={'edit'} />,
-        <GalleryFour mode={'edit'} />
-    ];
     const nextTemplate = () => {
-        setCurrentTemIndex((prevIndex) => (prevIndex + 1) % galleryTemplates.length);
+        setCurrentTemIndex(prevIndex => (prevIndex + 1) % GalleryTemData.length);
     };
+
     const prevTemplate = () => {
-        setCurrentTemIndex((prevIndex) => (prevIndex - 1 + galleryTemplates.length) % galleryTemplates.length);
+        setCurrentTemIndex(prevIndex => (prevIndex - 1 + GalleryTemData.length) % GalleryTemData.length);
     };
+
     return (
         <>
             <DarkImageBackground />
@@ -70,8 +62,7 @@ const GallerySelect: React.FC = () => {
                     </div>
                 </div>
                 <div className="h-full flex flex-col w-full lg:w-[60%] py-2 px-1">
-                    {galleryTemplates[currentTemIndex]}
-                    {/* <BoxTextOne data={userInfo}/> */}
+                    <GalleryIndex mode={'edit'} selectTem={currentTemIndex} />,
                     <BoxTextTwo data={userInfo} />
                 </div>
             </div>
