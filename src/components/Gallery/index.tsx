@@ -2,7 +2,7 @@ import { GalleryTemData } from '@/data/gallery';
 import React, { useEffect, useState } from 'react';
 
 interface GalleryProps {
-    mode: 'edit' | 'view'; // Mode can be 'edit' or 'view'
+    mode: 'edit' | 'view'; 
 }
 
 const GalleryIndex: React.FC<GalleryProps> = ({ mode }) => {
@@ -12,11 +12,9 @@ const GalleryIndex: React.FC<GalleryProps> = ({ mode }) => {
         console.log(selectedImages);
     }, [selectedImages]);
 
-    // Handler for file input change
     const handleFileChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const fileURL = URL.createObjectURL(e.target.files[0]);
-            // Update the specific image by index
             const newImages = [...selectedImages];
             newImages[index] = fileURL;
             setSelectedImages(newImages);
