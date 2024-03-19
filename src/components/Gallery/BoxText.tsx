@@ -11,23 +11,25 @@ interface BoxTextProps {
     };
 }
 
-const BoxTextOne: React.FC<BoxTextProps> = ({ data }) => {
+const BoxText: React.FC<BoxTextProps> = ({ data }) => {
     const { name, facebook, instagram, line, caption } = data;
     const isOtherInfoEmpty = !facebook && !instagram && !line;
 
     return (
-        <div className={`w-full flex bg-white rounded-lg p-4 items-center justify-center mt-2 ${!caption && !name && isOtherInfoEmpty ? 'hidden' : ''}`} style={{ maxHeight: '220px' }}>
-            {caption && (
-                <div className="font-extrabold text-4xl break-words leading-normal overflow-hidden text-center w-full" style={{ maxWidth: isOtherInfoEmpty ? "100%" : "60%" }}>
-                    {caption}
-                </div>
-            )}
-            <div className="block flex-wrap ml-3">
+        <div className={`w-full flex flex-col bg-white rounded-lg p-4 items-center justify-center mt-2 ${!caption && !name && isOtherInfoEmpty ? 'hidden' : ''}`} style={{ maxHeight: '220px' }}>
+            <div className="flex justify-around w-full items-center">
+                {caption && (
+                    <div id='show_caption' className="font-extrabold text-5xl break-words leading-normal overflow-hidden text-center">
+                        {caption}
+                    </div>
+                )}
                 {name && (
-                    <div id='show_name' className='font-extrabold text-4xl w-full break-words'>
+                    <div id='show_name' className='font-extrabold text-3xl break-words' >
                         {name}
                     </div>
                 )}
+            </div>
+            <div className="flex justify-around w-full">
                 {facebook && (
                     <div id='show_facebook' className='font-black leading-relaxed text-3xl flex items-center text-blue-600'>
                         <FaFacebook className='mr-1' /> : {facebook}
@@ -45,7 +47,8 @@ const BoxTextOne: React.FC<BoxTextProps> = ({ data }) => {
                 )}
             </div>
         </div>
+
     );
 }
 
-export default BoxTextOne;
+export default BoxText;
