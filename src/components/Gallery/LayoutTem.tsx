@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import DarkImageBackground from "@/components/BG";
-import GalleryIndex from "@/components/Gallery";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import BoxTextTwo from './BoxTextTwo';
 import BoxTextOne from './BoxTextOne';
+import GalleryIndex from "@/components/Gallery";
 import GalleryTwo from '@/components/Gallery/two';
-import GalleryThree from './three';
-import GalleryFour from './four';
+import GalleryThree from '@/components/Gallery/three';
+import GalleryFour from '@/components/Gallery/four';
 const GallerySelect: React.FC = () => {
     const [currentTemIndex, setCurrentTemIndex] = useState(0);
 
@@ -25,10 +25,10 @@ const GallerySelect: React.FC = () => {
     };
 
     const galleryTemplates = [
-        <GalleryIndex />,
-        <GalleryTwo />,
-        <GalleryThree />,
-        <GalleryFour />
+        <GalleryIndex mode={'edit'} />,
+        <GalleryTwo mode={'edit'} />,
+        <GalleryThree mode={'edit'} />,
+        <GalleryFour mode={'edit'} />
     ];
     const nextTemplate = () => {
         setCurrentTemIndex((prevIndex) => (prevIndex + 1) % galleryTemplates.length);

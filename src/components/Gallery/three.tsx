@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const GalleryThree: React.FC = () => {
+interface GalleryProps {
+    mode: 'edit' | 'view'; // Mode can be 'edit' or 'view'
+}
+
+const GalleryThree:  React.FC<GalleryProps> = ({ mode }) => {
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    // Handler for file input change
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            // Create a URL for the selected file
+            const fileURL = URL.createObjectURL(e.target.files[0]);
+            setSelectedImage(fileURL);
+        }
+    };
+
     return (
         <div className="w-full flex-grow flex rounded-lg h-[100px] bg-white">
             <div className="flex w-full flex-wrap">
