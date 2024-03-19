@@ -8,11 +8,11 @@ const GallerySelect: React.FC = () => {
     const [currentTemIndex, setCurrentTemIndex] = useState(0);
 
     const [userInfo, setUserInfo] = useState({
+        caption: '',
         name: '',
         facebook: '',
         instagram: '',
         line: '',
-        caption: ''
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +62,7 @@ const GallerySelect: React.FC = () => {
                     </div>
                 </div>
                 <div className="h-full flex flex-col w-full lg:w-[60%] py-2 px-1">
-                    <GalleryIndex mode={'edit'} selectTem={currentTemIndex} />,
+                    <GalleryIndex mode={'edit'} selectTem={currentTemIndex} />
                     <BoxText data={userInfo} />
                 </div>
             </div>
