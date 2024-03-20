@@ -3,14 +3,31 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
+// Define an interface for the image object structure
+interface Image {
+  number: number;
+  src: string;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { method } = req;
 
     switch (method) {
         case 'POST':
             try {
-                // Assuming req.body is structured correctly for nested creation
-                const { name, caption, facebook, instagram, galleryTemplate, checkPrice, imageDatas, payment } = req.body;
+                const { name, caption, facebook, instagram, line, galleryTemplate, selectedImages } = req.body;
+
+                // Use the Image interface to type each image in selectedImages
+                const imageDatas = selectedImages.map((image: Image) => ({
+                    number: image.number,
+                    src: image.src,
+                }));
+
+                // Constructing the payment object based on the provided structure
+                const payment = {
+                    amount: 29, // Setting the amount as specified
+                    status: 'Pending', // Setting the initial status
+                };
 
                 const profile = await prisma.profileData.create({
                     data: {
@@ -18,13 +35,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         caption,
                         facebook,
                         instagram,
+                        line,
                         galleryTemplate,
-                        checkPrice,
                         ImageData: {
-                            create: imageDatas,
+                            create: imageDatas, // Nested creation of ImageData
                         },
                         Payment: {
-                            create: payment,
+                            create: payment, // Nested creation of Payment
                         },
                     },
                 });
@@ -35,6 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 res.status(500).json({ error: "An error occurred while creating the profile with nested data" });
             }
             break;
+
         default:
             res.setHeader('Allow', ['GET', 'POST']);
             res.status(405).end(`Method ${method} Not Allowed`);

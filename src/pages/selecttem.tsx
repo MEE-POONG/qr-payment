@@ -31,15 +31,46 @@ const SelectTem: React.FC = () => {
     setGalleryTemplate(prevIndex => (prevIndex - 1 + GalleryTemData.length) % GalleryTemData.length);
   };
 
-  const handleSubmit = () => {
-    console.log('User Info:', userInfo);
-    setSelectedImages(prev => {
-      const newSize = GalleryTemData[galleryTemplate].imglist.length;
-      const newArray = [...prev];
-      newArray.length = newSize; // Adjust the length of the array
-      newArray.fill("", prev.length); // Fill new slots with empty strings
-      return newArray;
-    });
+  const handleSubmit = async () => {
+    const imageDatas = selectedImages.map((src, index) => ({
+          number: (index + 1).toString(),
+      src,
+    }));
+
+    const payment = {
+      amount: 29, // Example amount
+      status: 'Pending', // Example status
+    };
+
+    const requestBody = {
+      name: userInfo.name,
+      caption: userInfo.caption,
+      facebook: userInfo.facebook,
+      instagram: userInfo.instagram,
+      line: userInfo.line,
+      galleryTemplate: galleryTemplate,
+      selectedImages: imageDatas, // Include the transformed selected images
+      payment: payment, // Include the payment details
+    };
+
+    try {
+      const response = await fetch('/api/profiledata/poststory', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Profile created successfully:', data);
+    } catch (error) {
+      console.error('Failed to create profile:', error);
+    }
   };
 
   return (
