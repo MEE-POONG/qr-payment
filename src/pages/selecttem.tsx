@@ -7,7 +7,7 @@ import Layout from '@/components/layout';
 import UserInfoForm from '@/components/Gallery/UserInfoForm';
 
 const SelectTem: React.FC = () => {
-  const [currentTemIndex, setCurrentTemIndex] = useState(0);
+  const [galleryTemplate, setGalleryTemplate] = useState(0);
 
   const [userInfo, setUserInfo] = useState({
     caption: '',
@@ -18,33 +18,28 @@ const SelectTem: React.FC = () => {
   });
   const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
 
-  // useEffect(() => {
-  //   // Adjust the size of selectedImages whenever currentTemIndex changes
-  //   setSelectedImages(prev => {
-  //     const newSize = GalleryTemData[currentTemIndex].imglist.length;
-  //     const newArray = [...prev];
-  //     newArray.length = newSize; // Adjust the length of the array
-  //     newArray.fill("", prev.length); // Fill new slots with empty strings
-  //     return newArray;
-  //   });
-  // }, [currentTemIndex]);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setUserInfo(prevInfo => ({ ...prevInfo, [id]: value }));
   };
 
   const nextTemplate = () => {
-    setCurrentTemIndex(prevIndex => (prevIndex + 1) % GalleryTemData.length);
+    setGalleryTemplate(prevIndex => (prevIndex + 1) % GalleryTemData.length);
   };
 
   const prevTemplate = () => {
-    setCurrentTemIndex(prevIndex => (prevIndex - 1 + GalleryTemData.length) % GalleryTemData.length);
+    setGalleryTemplate(prevIndex => (prevIndex - 1 + GalleryTemData.length) % GalleryTemData.length);
   };
 
   const handleSubmit = () => {
     console.log('User Info:', userInfo);
-    console.log('Selected Images:', selectedImages.slice(0, GalleryTemData[currentTemIndex].imglist.length));
+    setSelectedImages(prev => {
+      const newSize = GalleryTemData[galleryTemplate].imglist.length;
+      const newArray = [...prev];
+      newArray.length = newSize; // Adjust the length of the array
+      newArray.fill("", prev.length); // Fill new slots with empty strings
+      return newArray;
+    });
   };
 
   return (
@@ -58,7 +53,7 @@ const SelectTem: React.FC = () => {
                 <FaChevronLeft />
               </button>
               <div className="flex-grow text-center py-2">
-                Tem {currentTemIndex + 1}
+                Tem {galleryTemplate + 1}
               </div>
               <button onClick={nextTemplate} className="py-2">
                 <FaChevronRight />
@@ -72,7 +67,7 @@ const SelectTem: React.FC = () => {
         <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
           <GalleryIndex
             mode={'edit'}
-            selectTem={currentTemIndex}
+            selectTem={galleryTemplate}
             selectedImages={selectedImages}
             updateSelectedImages={setSelectedImages}
           />

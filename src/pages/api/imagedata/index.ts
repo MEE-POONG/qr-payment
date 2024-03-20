@@ -1,4 +1,3 @@
-// pages/api/imageData/index.ts
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from 'next';
 
