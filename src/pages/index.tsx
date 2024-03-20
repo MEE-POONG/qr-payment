@@ -1,8 +1,7 @@
-import DarkImageBackground from "@/components/BG";
 import GalleryIndex from "@/components/Gallery";
 import BoxText from "@/components/Gallery/BoxText";
 import Layout from "@/components/layout";
-import SliderClothSquare from "@/components/Slider/ClothSquare";
+import SliderIndex from "@/components/Slider";
 import { GalleryTemData } from "@/data/gallery";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -69,8 +68,23 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <SliderClothSquare />
-      {/* <div className='container m-auto flex h-full flex-wrap justify-center'>
+      {/* <SliderClothSquare>
+        <div className='container m-auto flex h-full flex-wrap justify-center'>
+          {profiles.map((profile) => (
+            <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
+              <GalleryIndex
+                mode={'view'}
+                selectTem={profile.galleryTemplate}
+                selectedImages={profile.ImageData.map(image => image.src)}
+                updateSelectedImages={setSelectedImages}
+              />
+              <BoxText data={profile} />
+            </div>
+          ))}
+        </div>
+      </SliderClothSquare> */}
+      {/* <SliderIndex /> */}
+      <SliderIndex>
         {profiles.map((profile) => (
           <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
             <GalleryIndex
@@ -82,7 +96,8 @@ const Home: React.FC = () => {
             <BoxText data={profile} />
           </div>
         ))}
-      </div> */}
+      </SliderIndex>
+
       <div className="absolute bg-white p-2 bottom-0 m-4 text-center">
         <p className="text-2xl font-bold text-pink-600 drop-shadow-lg">Scan Me</p>
         <Image src='/images/qrcode.png' width={100} height={100} alt="" className="mx-auto w-44" />

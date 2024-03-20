@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaLine } from 'react-icons/fa';
 
-interface BoxTextProps {
+interface BoxTestProps {
     data: {
         name: string;
         facebook: string;
@@ -11,7 +11,7 @@ interface BoxTextProps {
     };
 }
 
-const BoxText: React.FC<BoxTextProps> = ({ data }) => {
+const BoxTest: React.FC<BoxTestProps> = ({ data }) => {
     const { name, facebook, instagram, line, caption } = data;
     const isOtherInfoEmpty = !facebook && !instagram && !line;
 
@@ -51,4 +51,4 @@ const BoxText: React.FC<BoxTextProps> = ({ data }) => {
     );
 }
 
-export default BoxText;
+export default BoxTest;
