@@ -7,7 +7,7 @@ export default function LoginForm() {
             <div className="flex justify-center md:items-center md:p-24">
                 <div className="bg-white p-7 max-w-md mx-auto rounded-md relative mt-20  shadow-md " >
                     <div className="bg-black rounded-full overflow-hidden w-20 h-20 absolute -top-10 shadow-md ">
-                        <img className="w-full h-full absolute" src="w-12 h-12" alt="" />
+                        <img className="w-full h-full absolute" src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/700" alt="" />
                     </div>
                     <div className="mt-10">
                         <p>Username:</p>
