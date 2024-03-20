@@ -4,14 +4,11 @@ import React, { useEffect, useState } from 'react';
 interface GalleryProps {
     mode: 'edit' | 'view';
     selectTem: number;
+    updateSelectedImages: (images: string[]) => void;
 }
 
 const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem }) => {
     const [selectedImages, setSelectedImages] = useState<string[]>(Array(4).fill(""));
-
-    useEffect(() => {
-        console.log("selectTem : ", selectTem);
-    }, [selectTem]);
 
     const handleFileChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
