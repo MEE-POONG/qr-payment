@@ -7,7 +7,7 @@ interface GalleryProps {
     updateSelectedImages: (images: string[]) => void;
 }
 
-const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem }) => {
+const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, updateSelectedImages }) => {
     const [selectedImages, setSelectedImages] = useState<string[]>(Array(4).fill(""));
 
     const handleFileChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +16,7 @@ const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem }) => {
             const newImages = [...selectedImages];
             newImages[index] = fileURL;
             setSelectedImages(newImages);
+            updateSelectedImages(newImages);
         }
     };
 

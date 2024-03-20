@@ -60,7 +60,7 @@ const SelectTem: React.FC = () => {
           </div>
         </div>
         <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
-          <GalleryIndex mode={'edit'} selectTem={currentTemIndex} updateSelectedImages={setSelectedImages} />
+          <GalleryIndex mode={'edit'} selectTem={currentTemIndex}  updateSelectedImages={setSelectedImages} />
           <BoxText data={userInfo} />
         </div>
         <div className="h-auto flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 md:hidden">
