@@ -4,18 +4,17 @@ import React, { useEffect, useState } from 'react';
 interface GalleryProps {
     mode: 'edit' | 'view';
     selectTem: number;
+    selectedImages: string[]; // Now accepting selectedImages as prop
     updateSelectedImages: (images: string[]) => void;
 }
 
-const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, updateSelectedImages }) => {
-    const [selectedImages, setSelectedImages] = useState<string[]>(Array(4).fill(""));
+const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, selectedImages, updateSelectedImages }) => {
 
     const handleFileChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const fileURL = URL.createObjectURL(e.target.files[0]);
             const newImages = [...selectedImages];
             newImages[index] = fileURL;
-            setSelectedImages(newImages);
             updateSelectedImages(newImages);
         }
     };

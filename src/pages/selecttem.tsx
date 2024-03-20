@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import GalleryIndex from "@/components/Gallery";
 import { GalleryTemData } from '@/data/gallery';
@@ -16,8 +16,18 @@ const SelectTem: React.FC = () => {
     instagram: '',
     line: '',
   });
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
 
+  // useEffect(() => {
+  //   // Adjust the size of selectedImages whenever currentTemIndex changes
+  //   setSelectedImages(prev => {
+  //     const newSize = GalleryTemData[currentTemIndex].imglist.length;
+  //     const newArray = [...prev];
+  //     newArray.length = newSize; // Adjust the length of the array
+  //     newArray.fill("", prev.length); // Fill new slots with empty strings
+  //     return newArray;
+  //   });
+  // }, [currentTemIndex]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -60,7 +70,12 @@ const SelectTem: React.FC = () => {
           </div>
         </div>
         <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
-          <GalleryIndex mode={'edit'} selectTem={currentTemIndex}  updateSelectedImages={setSelectedImages} />
+          <GalleryIndex
+            mode={'edit'}
+            selectTem={currentTemIndex}
+            selectedImages={selectedImages}
+            updateSelectedImages={setSelectedImages}
+          />
           <BoxText data={userInfo} />
         </div>
         <div className="h-auto flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 md:hidden">
