@@ -1,10 +1,11 @@
 import { Sriracha } from 'next/font/google'
 import LogoutButton from './LogoutButton'
+import DarkImageBackground from './BG'
 
 
 
 export const sriracha = Sriracha({
-  weight:'400',
+  weight: '400',
   subsets: ['latin'],
 })
 
@@ -16,10 +17,9 @@ export default function Layout({
 }) {
   return (
     <section>
-      {/* <Navbar /> */}
-     
-      <LogoutButton />
-      <main className={`min-h-screen px-5 py-14 md:p-24`}>
+      {/* <LogoutButton /> */}
+      <main className={`relative w-screen h-screen`}>
+        <DarkImageBackground />
         {children}
       </main>
     </section>
