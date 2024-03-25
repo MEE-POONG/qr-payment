@@ -1,4 +1,5 @@
 import GalleryIndex from "@/components/Gallery";
+import BoxTest from "@/components/Gallery/BoxTest";
 import BoxText from "@/components/Gallery/BoxText";
 import Layout from "@/components/layout";
 import SliderIndex from "@/components/Slider";
@@ -41,15 +42,7 @@ interface Profile {
 }
 
 const Home: React.FC = () => {
-  const [galleryTemplate, setGalleryTemplate] = useState(0);
   const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
-  const [userInfo, setUserInfo] = useState({
-    caption: '',
-    name: '',
-    facebook: '',
-    instagram: '',
-    line: '',
-  });
   const [profiles, setProfiles] = useState<Profile[]>([]);
 
   useEffect(() => {
@@ -68,23 +61,8 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      {/* <SliderClothSquare>
-        <div className='container m-auto flex h-full flex-wrap justify-center'>
-          {profiles.map((profile) => (
-            <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
-              <GalleryIndex
-                mode={'view'}
-                selectTem={profile.galleryTemplate}
-                selectedImages={profile.ImageData.map(image => image.src)}
-                updateSelectedImages={setSelectedImages}
-              />
-              <BoxText data={profile} />
-            </div>
-          ))}
-        </div>
-      </SliderClothSquare> */}
-      {/* <SliderIndex /> */}
       <SliderIndex>
+        {/* <img src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/700" alt="" /> */}
         {profiles.map((profile) => (
           <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
             <GalleryIndex
@@ -93,7 +71,8 @@ const Home: React.FC = () => {
               selectedImages={profile.ImageData.map(image => image.src)}
               updateSelectedImages={setSelectedImages}
             />
-            <BoxText data={profile} />
+            {/* <BoxText data={profile} /> */}
+            <BoxTest data={profile} />
           </div>
         ))}
       </SliderIndex>
