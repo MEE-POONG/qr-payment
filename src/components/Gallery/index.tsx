@@ -6,9 +6,10 @@ interface GalleryProps {
     selectTem: number;
     selectedImages: string[]; // Now accepting selectedImages as prop
     updateSelectedImages: (images: string[]) => void;
+    updateImageCount: (count: number) => void; // ฟังก์ชัน callback สำหรับการอัปเดตจำนวนรูปภาพ
 }
 
-const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, selectedImages, updateSelectedImages }) => {
+const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, selectedImages, updateSelectedImages, updateImageCount }) => {
 
     const handleFileChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -21,6 +22,16 @@ const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, selectedImages,
 
     const selectedTemplate = GalleryTemData.find(template => template.tem === selectTem);
 
+    useEffect(() => {
+        if (selectedTemplate) {
+            if (typeof updateImageCount === 'function') {
+                updateImageCount(selectedTemplate?.imglist?.length);
+            } else {
+                console.error('updateImageCount is not a function', updateImageCount);
+            }
+        }
+    }, [selectedTemplate, updateImageCount])
+    
     return (
         <div className="w-full flex-grow flex rounded-lg h-[100px] bg-white">
             <div className={`w-full flex flex-wrap ${selectedTemplate?.classBox} rounded-lg h-full bg-white`}>
