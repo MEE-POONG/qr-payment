@@ -123,7 +123,7 @@ const SelectTem: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={`${isUserInfoPopulated() ? `h-[60%]` : `h-[45%]`} flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1`}>
+        <div className={`${isUserInfoPopulated() ? `h-[50%]` : `h-[45%]`} flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1`}>
           <GalleryIndex
             mode={'edit'}
             selectTem={galleryTemplate}

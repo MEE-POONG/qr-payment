@@ -1,5 +1,4 @@
 import GalleryIndex from "@/components/Gallery";
-import BoxTest from "@/components/Gallery/BoxTest";
 import BoxText from "@/components/Gallery/BoxText";
 import Layout from "@/components/layout";
 import SliderIndex from "@/components/Slider";
@@ -78,8 +77,7 @@ const Home: React.FC = () => {
               updateSelectedImages={setSelectedImages}
               updateImageCount={updateImageCount}
             />
-            {/* <BoxText data={profile} /> */}
-            <BoxTest data={profile} />
+            <BoxText data={profile} />
           </div>
         ))}
       </SliderIndex>
