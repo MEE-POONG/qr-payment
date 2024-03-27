@@ -5,9 +5,11 @@ import { GalleryTemData } from '@/data/gallery';
 import BoxText from '@/components/Gallery/BoxText';
 import Layout from '@/components/layout';
 import UserInfoForm from '@/components/Gallery/UserInfoForm';
+import axios from 'axios';
 
 const SelectTem: React.FC = () => {
   const [galleryTemplate, setGalleryTemplate] = useState(0);
+  const [imageCount, setImageCount] = useState(0); // State สำหรับจำนวนรูปภาพ
 
   const [userInfo, setUserInfo] = useState({
     caption: '',
@@ -16,60 +18,105 @@ const SelectTem: React.FC = () => {
     instagram: '',
     line: '',
   });
-  const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
+  const [selectedImages, setSelectedImages] = useState<string[]>(Array().fill(""));
 
+  const updateImageCount = (count: number) => {
+    setImageCount(count);
+  };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setUserInfo(prevInfo => ({ ...prevInfo, [id]: value }));
   };
 
-  const nextTemplate = () => {
-    setGalleryTemplate(prevIndex => (prevIndex + 1) % GalleryTemData.length);
+  const navigateTemplate = (direction: 'next' | 'prev') => {
+    setGalleryTemplate(prevIndex => {
+      const newIndex = direction === 'next' ? prevIndex + 1 : prevIndex - 1;
+      return (newIndex + GalleryTemData.length) % GalleryTemData.length;
+    });
   };
 
-  const prevTemplate = () => {
-    setGalleryTemplate(prevIndex => (prevIndex - 1 + GalleryTemData.length) % GalleryTemData.length);
+  const uploadImage = async (imageBlob: Blob): Promise<string | null> => {
+    const uploadFormData = new FormData();
+    uploadFormData.append("file", imageBlob);
+    try {
+      const uploadResponse = await axios.post(
+        "https://upload-image.me-prompt-technology.com/",
+        uploadFormData,
+      );
+
+      if (uploadResponse?.status === 200) {
+        return uploadResponse?.data?.result?.id;
+      }
+    } catch (error) {
+      console.error("Upload failed:", error);
+    }
+    return null;
   };
+
+
 
   const handleSubmit = async () => {
-    const imageDatas = selectedImages.map((src, index) => ({
-          number: (index + 1).toString(),
-      src,
-    }));
+    console.log(imageCount);
+    console.log("selectedImages : ", selectedImages);
+    console.log("userInfo : ", userInfo);
 
-    const payment = {
-      amount: 29, // Example amount
-      status: 'Pending', // Example status
-    };
 
-    const requestBody = {
-      name: userInfo.name,
-      caption: userInfo.caption,
-      facebook: userInfo.facebook,
-      instagram: userInfo.instagram,
-      line: userInfo.line,
-      galleryTemplate: galleryTemplate,
-      selectedImages: imageDatas, // Include the transformed selected images
-      payment: payment, // Include the payment details
-    };
+    // if (selectedImages.length > 0) {
+    //   const imageUploadPromises = selectedImages.slice(0, imageCount).map(async (imageSrc) => {
+    //     const response = await fetch(imageSrc);
+    //     const blob = await response.blob();
+    //     return uploadImage(blob);
+    //   });
 
-    try {
-      const response = await fetch('/api/profiledata/poststory', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
+    //   try {
+    //     const imageIDs = await Promise.all(imageUploadPromises);
+    //     console.log('Uploaded Image Succeed:', imageIDs);
+    //   } catch (error) {
+    //     console.error('Error uploading images:', error);
+    //   }
+    // } else {
+    //   console.log('No images selected for upload.');
+    // }
+
+    if (selectedImages.length > 0) {
+      const imageUploadPromises = selectedImages.slice(0, imageCount).map(async (imageSrc) => {
+        const response = await fetch(imageSrc);
+        const blob = await response.blob();
+        return uploadImage(blob); // Assume this uploads the image and returns the ID or URL
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      try {
+        const imageIDs = await Promise.all(imageUploadPromises);
+        console.log('Uploaded Image IDs:', imageIDs);
 
-      const data = await response.json();
-      console.log('Profile created successfully:', data);
-    } catch (error) {
-      console.error('Failed to create profile:', error);
+        // Now, construct your complete request body with the image IDs and other info
+        const requestBody = {
+          name: userInfo.name,
+          caption: userInfo.caption,
+          facebook: userInfo.facebook,
+          instagram: userInfo.instagram,
+          line: userInfo.line,
+          galleryTemplate: galleryTemplate,
+          selectedImages: imageIDs.map((id, index) => ({ number: index + 1, src: id })),
+          // Assume your payment info is static or gathered from elsewhere
+          payment: { amount: 29, status: 'Pending' },
+        };
+
+        // Submit the complete form to your API
+        const response = await fetch('/api/profiledata/poststory', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody),
+        });
+
+        const data = await response.json();
+        console.log('Profile created successfully:', data);
+
+      } catch (error) {
+        console.error('Error uploading images or submitting form:', error);
+      }
+    } else {
+      console.log('No images selected for upload.');
     }
   };
 
@@ -80,13 +127,13 @@ const SelectTem: React.FC = () => {
           <div className="w-full flex-grow bg-white rounded-lg p-4">
             <span className="block text-lg font-medium text-slate-700 ">เลือกเทมเพลต</span>
             <div id="select_gallery" className='flex w-full h-max justify-center text-3xl'>
-              <button onClick={prevTemplate} className="py-2">
+              <button onClick={() => navigateTemplate('prev')} className="py-2">
                 <FaChevronLeft />
               </button>
-              <div className="flex-grow text-center py-2">
+              <div className="text-center py-2">
                 Tem {galleryTemplate + 1}
               </div>
-              <button onClick={nextTemplate} className="py-2">
+              <button onClick={() => navigateTemplate('next')} className="py-2">
                 <FaChevronRight />
               </button>
             </div>
@@ -101,6 +148,7 @@ const SelectTem: React.FC = () => {
             selectTem={galleryTemplate}
             selectedImages={selectedImages}
             updateSelectedImages={setSelectedImages}
+            updateImageCount={updateImageCount}
           />
           <BoxText data={userInfo} />
         </div>

@@ -31,7 +31,7 @@ model ProfileData {
 
 model ImageData {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  number        String?
+  number        Int?
   src           String?
   createdAt     DateTime?    @default(now())
   updatedAt     DateTime?    @updatedAt
