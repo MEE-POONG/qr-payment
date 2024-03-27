@@ -57,10 +57,6 @@ const Home: React.FC = () => {
 
     fetchProfiles();
   }, []);
-  useEffect(() => {
-    console.log(profiles);
-  }, [profiles]);
-
 
   return (
     <Layout>
