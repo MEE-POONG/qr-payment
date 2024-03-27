@@ -16,10 +16,10 @@ const SliderIndex: React.FC<SliderIndexProps> = ({ children }) => {
         setActiveImage(prev => (prev - 1 + childrenArray.length) % childrenArray.length); // Cycle to the previous child
     };
 
-    // useEffect(() => {
-    //     const timer = setTimeout(clickNext, 3000);
-    //     return () => clearTimeout(timer);
-    // }, [activeImage, childrenArray.length]);
+    useEffect(() => {
+        const timer = setTimeout(clickNext, 3000);
+        return () => clearTimeout(timer);
+    }, [activeImage, childrenArray.length]);
 
     return (
         <div className='w-full h-full container m-auto transition-transform ease-in-out duration-500 flex justify-center'>

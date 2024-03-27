@@ -53,30 +53,11 @@ const SelectTem: React.FC = () => {
     return null;
   };
 
-
+  const isUserInfoPopulated = () => {
+    return Object.values(userInfo).some(value => value.trim() !== '');
+  };
 
   const handleSubmit = async () => {
-    console.log(imageCount);
-    console.log("selectedImages : ", selectedImages);
-    console.log("userInfo : ", userInfo);
-
-
-    // if (selectedImages.length > 0) {
-    //   const imageUploadPromises = selectedImages.slice(0, imageCount).map(async (imageSrc) => {
-    //     const response = await fetch(imageSrc);
-    //     const blob = await response.blob();
-    //     return uploadImage(blob);
-    //   });
-
-    //   try {
-    //     const imageIDs = await Promise.all(imageUploadPromises);
-    //     console.log('Uploaded Image Succeed:', imageIDs);
-    //   } catch (error) {
-    //     console.error('Error uploading images:', error);
-    //   }
-    // } else {
-    //   console.log('No images selected for upload.');
-    // }
 
     if (selectedImages.length > 0) {
       const imageUploadPromises = selectedImages.slice(0, imageCount).map(async (imageSrc) => {
@@ -142,7 +123,7 @@ const SelectTem: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
+        <div className={`${isUserInfoPopulated() ? `h-[60%]` : `h-[45%]`} flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1`}>
           <GalleryIndex
             mode={'edit'}
             selectTem={galleryTemplate}

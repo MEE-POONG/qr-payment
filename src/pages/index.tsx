@@ -44,7 +44,11 @@ interface Profile {
 const Home: React.FC = () => {
   const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [imageCount, setImageCount] = useState(0); // State สำหรับจำนวนรูปภาพ
 
+  const updateImageCount = (count: number) => {
+    setImageCount(count);
+  };
   useEffect(() => {
     const fetchProfiles = async () => {
       const response = await fetch('/api/profiledata/poststory');
@@ -62,7 +66,9 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <SliderIndex>
-        {/* <img src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/700" alt="" /> */}
+        <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
+          <img src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/700" className="w-full h-full bg-white rounded-lg" alt="" />
+        </div>
         {profiles.map((profile) => (
           <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
             <GalleryIndex
@@ -70,6 +76,7 @@ const Home: React.FC = () => {
               selectTem={profile.galleryTemplate}
               selectedImages={profile.ImageData.map(image => image.src)}
               updateSelectedImages={setSelectedImages}
+              updateImageCount={updateImageCount}
             />
             {/* <BoxText data={profile} /> */}
             <BoxTest data={profile} />
