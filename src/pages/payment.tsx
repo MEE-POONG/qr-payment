@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 import GalleryIndex from "@/components/Gallery";
 import Layout from "@/components/layout";
-import Image from "next/image";
 import { GalleryTemData } from "@/data/gallery";
 import BoxText from "@/components/Gallery/BoxText";
 
@@ -22,6 +22,7 @@ interface Payment {
   updatedAt: string;
   postProfileID: string;
 }
+
 interface Profile {
   id: string;
   name: string;
@@ -39,46 +40,64 @@ interface Profile {
 }
 
 const Payment: React.FC = () => {
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const router = useRouter();
   const [galleryTemplate, setGalleryTemplate] = useState(0);
-  const [imageCount, setImageCount] = useState(0); 
+  const [imageCount, setImageCount] = useState(0);
   const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-
-
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      const response = await fetch('/api/profiledata/poststory');
-      const data = await response.json();
-      setProfiles(data);
-    };
-
-    fetchProfiles();
-  }, []);
 
   const updateImageCount = (count: number) => {
     setImageCount(count);
   };
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      // const profileId = localStorage.getItem('profileId');
+      // console.log('Profile ID:', profileId);
+      const profileId = "6604e708267c6cd728534a5e";
+      // const { profileId } = router.query;
 
- 
+      if (typeof profileId !== 'string') return; // Ensure profileId is a string
+
+      try {
+        const response = await fetch(`/api/profiledata/poststory/${profileId}`);
+        const data: Profile = await response.json();
+        setProfile(data);
+      } catch (error) {
+        console.error('An error occurred while fetching the profile:', error);
+      }
+    };
+
+    if (router.isReady) {
+      fetchProfile();
+    }
+  }, [router.isReady, router.query]);
+  useEffect(() => {
+    console.log("profile : ", profile);
+
+  }, [profile]);
+
+
+
+
   return (
     <Layout>
       <div className='container m-auto flex h-full flex-wrap'>
-        {profiles.map((profile) => (
-          <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
+        {profile && (
+          <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
             <GalleryIndex
               mode={'view'}
               selectTem={profile.galleryTemplate}
-              selectedImages={profile.ImageData.map(image => image.src)}
+              selectedImages={profile?.ImageData?.map(image => image.src)}
               updateSelectedImages={setSelectedImages}
               updateImageCount={updateImageCount}
             />
             <BoxText data={profile} />
           </div>
-        ))}
+        )}
         <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 ">
           <div className="w-full flex-grow bg-white rounded-lg p-4">
-            <span className="block text-lg font-medium text-slate-700 ">เลือกเทมเพลต</span>
+            <span className="block text-lg font-medium text-slate-700 ">สรุปรายการ Post</span>
 
             <div className='hidden md:block '>
             </div>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import GalleryIndex from "@/components/Gallery";
 import { GalleryTemData } from '@/data/gallery';
@@ -8,6 +9,7 @@ import UserInfoForm from '@/components/Gallery/UserInfoForm';
 import axios from 'axios';
 
 const SelectTem: React.FC = () => {
+  const router = useRouter();
   const [galleryTemplate, setGalleryTemplate] = useState(0);
   const [imageCount, setImageCount] = useState(0); // State สำหรับจำนวนรูปภาพ
 
@@ -63,7 +65,7 @@ const SelectTem: React.FC = () => {
       const imageUploadPromises = selectedImages.slice(0, imageCount).map(async (imageSrc) => {
         const response = await fetch(imageSrc);
         const blob = await response.blob();
-        return uploadImage(blob); // Assume this uploads the image and returns the ID or URL
+        return uploadImage(blob); // สมมติว่าฟังก์ชันนี้อัพโหลดรูปภาพและส่งคืน ID หรือ URL
       });
 
       try {
@@ -91,7 +93,8 @@ const SelectTem: React.FC = () => {
         });
 
         const data = await response.json();
-        console.log('Profile created successfully:', data);
+        localStorage.setItem('profileId', data.id); // บันทึก ID ลงใน localStorage
+        router.push('/payment'); // นำทางไปยังหน้า /payment
 
       } catch (error) {
         console.error('Error uploading images or submitting form:', error);
