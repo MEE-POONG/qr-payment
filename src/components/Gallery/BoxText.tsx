@@ -16,7 +16,7 @@ const BoxText: React.FC<BoxTextProps> = ({ data }) => {
     const isOtherInfoEmpty = !facebook && !instagram && !line;
 
     return (
-        <div className={`w-full flex flex-col bg-white rounded-lg p-4 items-center justify-center mt-2 ${!caption && !name && isOtherInfoEmpty ? 'hidden' : ''}`} style={{ maxHeight: '220px' }}>
+        <div className={`w-full h-[180px] flex flex-col bg-white rounded-lg p-4 items-center justify-center mt-2 ${!caption && !name && isOtherInfoEmpty ? 'hidden' : ''}`} >
             <div className="flex justify-around w-full items-center p-1 md:p-2 ">
                 {caption && (
                     <div id='show_caption' className="font-extrabold text-5xl break-words leading-normal overflow-hidden text-center">

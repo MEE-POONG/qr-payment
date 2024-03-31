@@ -107,7 +107,7 @@ const SelectTem: React.FC = () => {
   return (
     <Layout>
       <div className='container m-auto flex h-full flex-wrap'>
-        <div className="flex flex-col w-full z-50 lg:w-[30%] py-2 px-1 rounded-lg p-4 ">
+        <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 ">
           <div className="w-full flex-grow bg-white rounded-lg p-4">
             <span className="block text-lg font-medium text-slate-700 ">เลือกเทมเพลต</span>
             <div id="select_gallery" className='flex w-full h-max justify-center text-3xl'>

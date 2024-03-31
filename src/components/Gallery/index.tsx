@@ -45,7 +45,7 @@ const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, selectedImages,
                             <img
                                 alt="gallery"
                                 className={`block w-full h-full rounded-lg object-cover object-center border-2 ${mode === 'edit' ? 'border-indigo-500 hover:border-yellow-700' : ''}`}
-                                src={mode === 'edit' ? (selectedImages[imgIndex] || "https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/f701ce08-7ebe-4af2-c4ec-2b3967392900/350") : `https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/${selectedImages[imgIndex]}/350`}
+                                src={mode === 'edit' ? (selectedImages[imgIndex] || "https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/f701ce08-7ebe-4af2-c4ec-2b3967392900/wsm") : `https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/${selectedImages[imgIndex]}/wsm`}
                             />
                         </label>
                     </div>
