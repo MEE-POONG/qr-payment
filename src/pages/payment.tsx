@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import GalleryIndex from "@/components/Gallery";
-import Layout from "@/components/layout";
-import { GalleryTemData } from "@/data/gallery";
-import BoxText from "@/components/Gallery/BoxText";
+import { GalleryTemData } from '@/data/gallery';
+import BoxText from '@/components/Gallery/BoxText';
+import Layout from '@/components/layout';
+import UserInfoForm from '@/components/Gallery/UserInfoForm';
+import axios from 'axios';
 
 interface ImageData {
   id: string;
@@ -40,25 +43,54 @@ interface Profile {
 }
 
 const Payment: React.FC = () => {
-  const [profile, setProfile] = useState<Profile | null>(null);
   const router = useRouter();
-  const [galleryTemplate, setGalleryTemplate] = useState(0);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [imageCount, setImageCount] = useState(0);
   const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
+  const [galleryTemplate, setGalleryTemplate] = useState(0);
+
+  const [userInfo, setUserInfo] = useState({
+    caption: '',
+    name: '',
+    facebook: '',
+    instagram: '',
+    line: '',
+  });
+  const [isLargeScreen, setIsLargeScreen] = useState<boolean>(false);
+  const [isLandscape, setIsLandscape] = useState<boolean>(false);
+  const [dynamicStyle, setDynamicStyle] = useState<React.CSSProperties>({});
 
   const updateImageCount = (count: number) => {
     setImageCount(count);
   };
 
   useEffect(() => {
+    const checkScreenOrientation = () => {
+      if (typeof window !== 'undefined') {
+        setIsLargeScreen(window.innerWidth > 1024);
+        setIsLandscape(window.innerHeight < window.innerWidth);
+      }
+    };
+
+    checkScreenOrientation();
+
+    window.addEventListener('resize', checkScreenOrientation);
+
+    return () => window.removeEventListener('resize', checkScreenOrientation);
+  }, []);
+
+  useEffect(() => {
+    if (isLargeScreen && isLandscape) {
+      setDynamicStyle({ height: 'calc(100vh - 180px - 0.25rem)' });
+    } else {
+      setDynamicStyle({ width: '100%' });
+    }
+  }, [isLargeScreen, isLandscape]);
+
+  useEffect(() => {
     const fetchProfile = async () => {
-      // const profileId = localStorage.getItem('profileId');
-      // console.log('Profile ID:', profileId);
-      const profileId = "6604e708267c6cd728534a5e";
-      // const { profileId } = router.query;
-
-      if (typeof profileId !== 'string') return; // Ensure profileId is a string
-
+      const profileId = localStorage.getItem('profileId');
+      if (typeof profileId !== 'string') return;
       try {
         const response = await fetch(`/api/profiledata/poststory/${profileId}`);
         const data: Profile = await response.json();
@@ -74,30 +106,31 @@ const Payment: React.FC = () => {
   }, [router.isReady, router.query]);
   useEffect(() => {
     console.log("profile : ", profile);
-
   }, [profile]);
 
   return (
     <Layout>
-      <div className='container m-auto flex h-full flex-wrap'>
-        {profile && (
-          <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
-            <GalleryIndex
-              mode={'view'}
-              selectTem={profile.galleryTemplate}
-              selectedImages={profile?.ImageData?.map(image => image.src)}
-              updateSelectedImages={setSelectedImages}
-              updateImageCount={updateImageCount}
-            />
-            <BoxText data={profile} />
-          </div>
-        )}
-        <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 ">
-          <div className="w-full flex-grow bg-white rounded-lg p-4">
+      <div className='m-auto flex h-full flex-wrap lg:flex-nowrap'>
+        <div className='w-full md:max-md:h-screen lg:h-screen py-2 px-1 md:max-md:w-[70%] lg:w-[70%] flex justify-center' >
+          {profile && (
+            <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
+              <GalleryIndex
+                mode={'view'}
+                selectTem={profile.galleryTemplate}
+                selectedImages={profile?.ImageData?.map(image => image.src)}
+                updateSelectedImages={setSelectedImages}
+                updateImageCount={updateImageCount}
+              />
+              < div className={` absolute top-full w-full`} style={{ top: "calc(100% + 0.5rem)" }}>
+                <BoxText data={profile} />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4  mt-[100px] md:mt-[160px] ">
+          <div className="md:max-md:w-[95%] flex-grow bg-white rounded-lg p-4">
             <span className="block text-lg font-medium text-slate-700 ">สรุปรายการ Post</span>
 
-            <div className='hidden md:block '>
-            </div>
           </div>
         </div>
       </div>
