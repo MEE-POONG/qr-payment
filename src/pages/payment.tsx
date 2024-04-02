@@ -77,9 +77,6 @@ const Payment: React.FC = () => {
 
   }, [profile]);
 
-
-
-
   return (
     <Layout>
       <div className='container m-auto flex h-full flex-wrap'>

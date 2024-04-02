@@ -106,8 +106,17 @@ const SelectTem: React.FC = () => {
 
   return (
     <Layout>
-      <div className='container m-auto flex h-full flex-wrap'>
-        <div className="flex flex-col w-full z-50 lg:w-[30%] py-2 px-1 rounded-lg p-4 ">
+      <div className='bg-white h-screen '>
+        <div className='bg-yellow-500 relative aspect-square	' style={{ height: "calc(100vh - 180px)" }}>
+          ssss
+          <div className='absolute bg-red-500 w-full h-[180px] top-full'>
+            ddd
+          </div>
+        </div>
+
+      </div>
+      {/* <div className='container m-auto flex h-full flex-wrap'>
+        <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 ">
           <div className="w-full flex-grow bg-white rounded-lg p-4">
             <span className="block text-lg font-medium text-slate-700 ">เลือกเทมเพลต</span>
             <div id="select_gallery" className='flex w-full h-max justify-center text-3xl'>
@@ -126,17 +135,14 @@ const SelectTem: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={`${isUserInfoPopulated() ? `h-[50%]` : `h-[45%]`} flex flex-col w-full md:h-[100%]  py-2 px-1`}>
-          <div className='bg-white aspect-[2/3]' style={{ height: "calc(100vh - 185px)" }}>
-
-          </div>
-          {/* <GalleryIndex
+        <div className={`${isUserInfoPopulated() ? `h-[50%]` : `h-[45%]`} flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1`}>
+          <GalleryIndex
             mode={'edit'}
             selectTem={galleryTemplate}
             selectedImages={selectedImages}
             updateSelectedImages={setSelectedImages}
             updateImageCount={updateImageCount}
-          /> */}
+          />
           <BoxText data={userInfo} />
         </div>
         <div className="h-auto flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 md:hidden">
@@ -144,7 +150,7 @@ const SelectTem: React.FC = () => {
             <UserInfoForm userInfo={userInfo} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout >
   );
 }

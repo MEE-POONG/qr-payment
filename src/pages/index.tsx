@@ -61,9 +61,9 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <SliderIndex>
-        <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
+        {/* <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
           <img src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/700" className="w-full h-full bg-white rounded-lg" alt="" />
-        </div>
+        </div> */}
         {profiles.map((profile) => (
           <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
             <GalleryIndex
