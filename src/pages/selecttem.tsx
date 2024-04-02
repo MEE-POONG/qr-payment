@@ -106,7 +106,15 @@ const SelectTem: React.FC = () => {
 
   return (
     <Layout>
-      <div className='container m-auto flex h-full flex-wrap'>
+      <div className='h-screen '>
+        <div className='bg-yellow-500 relative aspect-[4/3]	m-auto' style={{ height: "calc(100vh - 180px)" }}>
+          ssss
+          <div className='absolute bg-red-500 w-full h-[180px] top-full'>
+            ddd
+          </div>
+        </div>
+      </div>
+      {/* <div className='container m-auto flex h-full flex-wrap'>
         <div className="flex flex-col w-full md:w-[20rem] z-50 py-2 px-1 rounded-lg p-4 ">
           <div className="w-full flex-grow bg-white rounded-lg p-4">
             <span className="block text-lg font-medium text-slate-700 ">เลือกเทมเพลต</span>
@@ -141,7 +149,7 @@ const SelectTem: React.FC = () => {
             <UserInfoForm userInfo={userInfo} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout >
   );
 }
