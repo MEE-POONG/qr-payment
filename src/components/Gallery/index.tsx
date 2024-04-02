@@ -33,7 +33,7 @@ const GalleryIndex: React.FC<GalleryProps> = ({ mode, selectTem, selectedImages,
     }, [selectedTemplate, updateImageCount])
 
     return (
-        <div className="w-full flex-grow flex rounded-lg h-[100px] bg-white">
+        <div className="w-full h-full flex-grow flex rounded-lg">
             <div className={`w-full flex flex-wrap ${selectedTemplate?.classBox} rounded-lg h-full bg-white`}>
                 {selectedTemplate?.imglist.map((img, imgIndex) => (
                     <div key={img.id} className="p-1 md:p-2 relative" style={{ width: img.w, height: img.h }}>
