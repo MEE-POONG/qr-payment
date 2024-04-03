@@ -22,7 +22,7 @@ const SliderIndex: React.FC<SliderIndexProps> = ({ children }) => {
     }, [activeImage, childrenArray.length]);
 
     return (
-        <div className='w-full h-full container m-auto transition-transform ease-in-out duration-500 flex justify-center'>
+        <div className='w-full h-full transition-transform ease-in-out duration-500 flex justify-center'>
             {childrenArray[activeImage]}
             <button onClick={clickPrev} className='absolute top-0 left-0 h-full text-white text-4xl opacity-50 hover:opacity-100'>
                 <FaChevronLeft />

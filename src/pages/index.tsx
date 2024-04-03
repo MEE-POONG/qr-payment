@@ -1,10 +1,14 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import GalleryIndex from "@/components/Gallery";
-import BoxText from "@/components/Gallery/BoxText";
-import Layout from "@/components/layout";
-import SliderIndex from "@/components/Slider";
-import { GalleryTemData } from "@/data/gallery";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { GalleryTemData } from '@/data/gallery';
+import BoxText from '@/components/Gallery/BoxText';
+import Layout from '@/components/layout';
+import UserInfoForm from '@/components/Gallery/UserInfoForm';
+import axios from 'axios';
+import Image from 'next/image';
+import SliderIndex from '@/components/Slider';
 
 interface ImageData {
   id: string;
@@ -40,14 +44,42 @@ interface Profile {
   Payment: Payment[];
 }
 
-const Home: React.FC = () => {
-  const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
+const Index: React.FC = () => {
   const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [imageCount, setImageCount] = useState(0); // State สำหรับจำนวนรูปภาพ
+  const [imageCount, setImageCount] = useState(0);
+  const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
+
+  const [isLargeScreen, setIsLargeScreen] = useState<boolean>(false);
+  const [isLandscape, setIsLandscape] = useState<boolean>(false);
+  const [dynamicStyle, setDynamicStyle] = useState<React.CSSProperties>({});
 
   const updateImageCount = (count: number) => {
     setImageCount(count);
   };
+
+  useEffect(() => {
+    const checkScreenOrientation = () => {
+      if (typeof window !== 'undefined') {
+        setIsLargeScreen(window.innerWidth > 1024);
+        setIsLandscape(window.innerHeight < window.innerWidth);
+      }
+    };
+
+    checkScreenOrientation();
+
+    window.addEventListener('resize', checkScreenOrientation);
+
+    return () => window.removeEventListener('resize', checkScreenOrientation);
+  }, []);
+
+  useEffect(() => {
+    if (isLargeScreen && isLandscape) {
+      setDynamicStyle({ height: 'calc(100vh - 180px - 0.25rem)' });
+    } else {
+      setDynamicStyle({ height: 'max-content' });
+    }
+  }, [isLargeScreen, isLandscape]);
+
   useEffect(() => {
     const fetchProfiles = async () => {
       const response = await fetch('/api/profiledata/poststory');
@@ -60,28 +92,39 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <SliderIndex>
-        {/* <div className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
-          <img src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/0fb05fae-8f4f-4edd-6c20-c188867ec900/700" className="w-full h-full bg-white rounded-lg" alt="" />
-        </div> */}
-        {profiles.map((profile) => (
-          <div key={profile.id} className="h-[60%] flex flex-col w-full md:h-[100%] lg:w-[60%] py-2 px-1">
-            <GalleryIndex
-              mode={'view'}
-              selectTem={profile.galleryTemplate}
-              selectedImages={profile.ImageData.map(image => image.src)}
-              updateSelectedImages={setSelectedImages}
-              updateImageCount={updateImageCount}
-            />
-            <BoxText data={profile} />
-          </div>
-        ))}
-      </SliderIndex>
-      <div className="absolute bg-white p-2 bottom-0 m-4 text-center">
-        <p className="text-2xl font-bold text-pink-600 drop-shadow-lg">Scan Me</p>
-        <Image src='/images/qrcode.png' width={100} height={100} alt="" className="mx-auto w-44" />
+      <div className='m-auto flex h-full flex-wrap lg:flex-nowrap content-start '>
+        <div className='w-full h-max md:max-md:h-screen lg:h-screen py-2 px-1 flex justify-center' >
+          <SliderIndex>
+            <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
+              <img src="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/d04ff08a-43b5-41db-bf6e-c28d608b5600/wlg" className="w-full h-full object-contain bg-white rounded-lg" alt="" />
+              < div className={` absolute top-full w-full h-[120px]`} style={{ top: "calc(100% + 0.5rem)" }}>
+                <div className={`flex flex-col bg-white rounded-lg items-center justify-center h-[100px] md:h-[160px] mb-2`} >
+                  <div className="flex justify-around w-full items-center p-1 md:p-2 ">
+                    <div id='show_caption' className="font-extrabold text-lg md:text-4xl lg:text-6xl break-words md:leading-normal lg:leading-normal overflow-hidden text-center text-white bg-red-500 p-4 tracking-[.25em] italic ">
+                      ESCOBAR
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {profiles.map((profile) => (
+              <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
+                <GalleryIndex
+                  mode={'view'}
+                  selectTem={profile.galleryTemplate}
+                  selectedImages={profile.ImageData.map(image => image.src)}
+                  updateSelectedImages={setSelectedImages}
+                  updateImageCount={updateImageCount}
+                />
+                < div className={` absolute top-full w-full`} style={{ top: "calc(100% + 0.5rem)" }}>
+                  <BoxText data={profile} />
+                </div>
+              </div>
+            ))}
+          </SliderIndex>
+        </div>
       </div>
-    </Layout>
+    </Layout >
   );
 }
-export default Home;
+export default Index;
