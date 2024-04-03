@@ -7,6 +7,7 @@ import BoxText from '@/components/Gallery/BoxText';
 import Layout from '@/components/layout';
 import UserInfoForm from '@/components/Gallery/UserInfoForm';
 import axios from 'axios';
+import Image from 'next/image';
 
 interface ImageData {
   id: string;
@@ -47,15 +48,7 @@ const Payment: React.FC = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [imageCount, setImageCount] = useState(0);
   const [selectedImages, setSelectedImages] = useState<string[]>(Array(GalleryTemData[0].imglist.length).fill(""));
-  const [galleryTemplate, setGalleryTemplate] = useState(0);
 
-  const [userInfo, setUserInfo] = useState({
-    caption: '',
-    name: '',
-    facebook: '',
-    instagram: '',
-    line: '',
-  });
   const [isLargeScreen, setIsLargeScreen] = useState<boolean>(false);
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
   const [dynamicStyle, setDynamicStyle] = useState<React.CSSProperties>({});
@@ -83,7 +76,7 @@ const Payment: React.FC = () => {
     if (isLargeScreen && isLandscape) {
       setDynamicStyle({ height: 'calc(100vh - 180px - 0.25rem)' });
     } else {
-      setDynamicStyle({ width: '100%' });
+      setDynamicStyle({ height: 'max-content' });
     }
   }, [isLargeScreen, isLandscape]);
 
@@ -110,8 +103,8 @@ const Payment: React.FC = () => {
 
   return (
     <Layout>
-      <div className='m-auto flex h-full flex-wrap lg:flex-nowrap'>
-        <div className='w-full md:max-md:h-screen lg:h-screen py-2 px-1 md:max-md:w-[70%] lg:w-[70%] flex justify-center' >
+      <div className='m-auto flex h-full flex-wrap lg:flex-nowrap content-start '>
+        <div className='w-full h-max md:max-md:h-screen lg:h-screen py-2 px-1 md:max-md:w-[70%] lg:w-[70%] flex justify-center' >
           {profile && (
             <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
               <GalleryIndex
@@ -127,10 +120,15 @@ const Payment: React.FC = () => {
             </div>
           )}
         </div>
-        <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4  mt-[100px] md:mt-[160px] ">
-          <div className="md:max-md:w-[95%] flex-grow bg-white rounded-lg p-4">
-            <span className="block text-lg font-medium text-slate-700 ">สรุปรายการ Post</span>
-
+        <div className="flex flex-col w-full z-50 lg:w-[40%] py-2 px-1 rounded-lg p-4 mt-[100px] md:mt-[160px] lg:mt-0 ">
+          <div className="md:max-md:w-[95%] md:flex-grow bg-white rounded-lg p-4 flex flex-col">
+            <span className="block text-2xl font-medium text-slate-700 ">สรุปรายการ Post</span>
+            <div className="flex text-2xl font-medium text-slate-700 ">ราคา<span className='ms-auto me-2 text-green-500'>29</span>บาท</div>
+            <div className='my-auto py-2 text-center'>
+              <span className="block text-2xl font-medium text-slate-700 mb-2">ชำระ</span>
+              <img src='/images/qrcode.png' alt="" className="rounded-md p-2 border-solid border-2 border-sky-500 mx-auto w-[90%] " />
+            </div>
+            <button className='bg-red-500 hover:bg-red-800  p-2 rounded-md text-white mt-auto'>ยกเลิกรายการ</button>
           </div>
         </div>
       </div>

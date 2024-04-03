@@ -157,7 +157,7 @@ const SelectTem: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className='w-full md:max-md:h-screen lg:h-screen  py-2 px-1 md:max-md:w-[70%] lg:w-[70%] flex justify-center' >
+        <div className='w-full h-max md:max-md:h-screen lg:h-screen  py-2 px-1 md:max-md:w-[70%] lg:w-[70%] ' >
           <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
             <GalleryIndex
               mode={'edit'}
