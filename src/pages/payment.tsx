@@ -5,9 +5,7 @@ import GalleryIndex from "@/components/Gallery";
 import { GalleryTemData } from '@/data/gallery';
 import BoxText from '@/components/Gallery/BoxText';
 import Layout from '@/components/layout';
-import UserInfoForm from '@/components/Gallery/UserInfoForm';
 import axios from 'axios';
-import Image from 'next/image';
 
 interface ImageData {
   id: string;
@@ -79,17 +77,31 @@ const Payment: React.FC = () => {
       setDynamicStyle({ height: 'max-content' });
     }
   }, [isLargeScreen, isLandscape]);
-
   useEffect(() => {
     const fetchProfile = async () => {
       const profileId = localStorage.getItem('profileId');
-      if (typeof profileId !== 'string') return;
+      console.log(profileId);
+
+      if (!profileId) {
+        router.push('/selecttem');
+        return;
+      }
+
       try {
         const response = await fetch(`/api/profiledata/poststory/${profileId}`);
-        const data: Profile = await response.json();
+        const data: Profile | null = await response.json();
+
+        // ตรวจสอบหากไม่พบข้อมูล (data เป็น null) หรือสถานะการชำระเงินไม่ใช่ pending
+        if (!data || data.Payment.some(payment => payment.status.toLowerCase() !== 'pending')) {
+          localStorage.setItem('profileId', ''); // ล้างค่าใน localStorage
+          router.push('/selecttem'); // วิ่งไปหน้า /selecttem
+          return;
+        }
+
         setProfile(data);
       } catch (error) {
         console.error('An error occurred while fetching the profile:', error);
+        // เพิ่มเงื่อนไขในการจัดการ error หากต้องการ
       }
     };
 
@@ -97,9 +109,39 @@ const Payment: React.FC = () => {
       fetchProfile();
     }
   }, [router.isReady, router.query]);
-  useEffect(() => {
-    console.log("profile : ", profile);
-  }, [profile]);
+
+  const handleCancel = async () => {
+    // ตรวจสอบและเตรียม profileId
+    const profileId = profile?.id;
+    if (!profileId) {
+      console.error("Profile ID is missing");
+      return;
+    }
+
+    // ลบรูปภาพทั้งหมด
+    const deleteImagesPromises = profile.ImageData.map(image =>
+      axios.delete(`https://upload-image.me-prompt-technology.com/?name=${image.src}`)
+    );
+    try {
+      await Promise.all(deleteImagesPromises);
+      console.log("All images deleted successfully");
+    } catch (error) {
+      console.error("Delete images failed: ", error);
+    }
+
+    // ลบรายการทุกข้อมูลที่เกี่ยวข้อง
+    try {
+      await fetch(`/api/profiledata/poststory/${profileId}`, {
+        method: 'DELETE',
+      });
+      console.log("Profile and related data deleted successfully");
+
+      // ทำการเปลี่ยนเส้นทางหลังจากลบข้อมูลเรียบร้อย
+      router.push('/selecttem'); // กลับไปยังหน้าหลักหรือหน้าที่เหมาะสม
+    } catch (error) {
+      console.error("Delete profile failed: ", error);
+    }
+  };
 
   return (
     <Layout>
@@ -128,7 +170,7 @@ const Payment: React.FC = () => {
               <span className="block text-2xl font-medium text-slate-700 mb-2">ชำระ</span>
               <img src='/images/qrcode.png' alt="" className="rounded-md p-2 border-solid border-2 border-sky-500 mx-auto w-[90%] " />
             </div>
-            <button className='bg-red-500 hover:bg-red-800  p-2 rounded-md text-white mt-auto'>ยกเลิกรายการ</button>
+            <button onClick={handleCancel} className='bg-red-500 hover:bg-red-800  p-2 rounded-md text-white mt-auto'>ยกเลิกรายการ</button>
           </div>
         </div>
       </div>

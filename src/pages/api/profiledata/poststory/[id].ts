@@ -22,7 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (profile) {
                     res.status(200).json(profile);
                 } else {
-                    res.status(404).json({ message: "Profile not found" });
+                    // ถ้าไม่พบโปรไฟล์, ส่งค่า null กลับไป
+                    res.status(200).json(null);
                 }
             } catch (error) {
                 res.status(500).json({ error: "An error occurred while fetching the profile" });

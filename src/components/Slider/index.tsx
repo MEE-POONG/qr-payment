@@ -17,7 +17,7 @@ const SliderIndex: React.FC<SliderIndexProps> = ({ children }) => {
     };
 
     useEffect(() => {
-        const timer = setTimeout(clickNext, 3000);
+        const timer = setTimeout(clickNext, 5000);
         return () => clearTimeout(timer);
     }, [activeImage, childrenArray.length]);
 
