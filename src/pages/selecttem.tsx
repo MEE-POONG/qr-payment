@@ -93,10 +93,6 @@ const SelectTem: React.FC = () => {
     return null;
   };
 
-  const isUserInfoPopulated = () => {
-    return Object.values(userInfo).some(value => value.trim() !== '');
-  };
-
   const handleSubmit = async () => {
 
     if (selectedImages.length > 0) {
