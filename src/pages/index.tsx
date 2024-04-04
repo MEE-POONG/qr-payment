@@ -87,7 +87,6 @@ const Index: React.FC = () => {
     }
   }, [isLargeScreen, isLandscape]);
 
-// สร้างฟังก์ชั่นและ รับค่าเลขของสไลด์ เช็คว่าใช้ลำดับสุดท้ายไหม profiles.legth ถ้าใช้ เรียกใช้ fetchProfiles
   return (
     <Layout>
       <div className='m-auto flex h-full flex-wrap lg:flex-nowrap content-start '>
