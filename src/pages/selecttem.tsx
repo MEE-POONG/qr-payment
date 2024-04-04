@@ -10,7 +10,11 @@ import axios from 'axios';
 
 const SelectTem: React.FC = () => {
   const router = useRouter();
-  const [galleryTemplate, setGalleryTemplate] = useState(0);
+  const [galleryTemplate, setGalleryTemplate] = useState({
+    tem: GalleryTemData[0].tem,
+    imgListCount: GalleryTemData[0].imglist.length,
+  });
+
   const [imageCount, setImageCount] = useState(0); // State สำหรับจำนวนรูปภาพ
 
   const [userInfo, setUserInfo] = useState({
@@ -27,8 +31,6 @@ const SelectTem: React.FC = () => {
 
   useEffect(() => {
     const profileId = localStorage.getItem('profileId');
-    console.log(profileId);
-
     if (profileId) {
       router.push('/payment');
       return;
@@ -52,6 +54,7 @@ const SelectTem: React.FC = () => {
   }, []);
 
   useEffect(() => {
+
     if (isLargeScreen && isLandscape) {
       setDynamicStyle({ height: 'calc(100vh - 180px - 0.25rem)' });
     } else {
@@ -69,9 +72,20 @@ const SelectTem: React.FC = () => {
   };
 
   const navigateTemplate = (direction: 'next' | 'prev') => {
-    setGalleryTemplate(prevIndex => {
-      const newIndex = direction === 'next' ? prevIndex + 1 : prevIndex - 1;
-      return (newIndex + GalleryTemData.length) % GalleryTemData.length;
+    setGalleryTemplate(prevState => {
+      // Calculate the new template index based on the direction
+      const newIndex = direction === 'next'
+        ? (prevState.tem + 1) % GalleryTemData.length
+        : (prevState.tem - 1 + GalleryTemData.length) % GalleryTemData.length;
+
+      // Fetch the new template from the GalleryTemData array
+      const newTemplate = GalleryTemData[newIndex];
+
+      // Return the new state with updated tem and imgListCount
+      return {
+        tem: newIndex,
+        imgListCount: newTemplate.imglist.length
+      };
     });
   };
 
@@ -94,7 +108,21 @@ const SelectTem: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    console.log(galleryTemplate);
+    const isUserInfoValid = Object.values(userInfo).some(value => value.trim().length > 4);
 
+    // Check if the number of selected images matches the required number of images for the template
+    const isImageCountValid = selectedImages.length === galleryTemplate.imgListCount;
+
+    if (!isUserInfoValid) {
+      alert(`กรุณากรอกข้อมูลในช่องข้อมูลผู้ใช้อย่างน้อยหนึ่งช่องที่มีอักขระมากกว่า 4 ตัว`);
+      return;
+    }
+
+    if (!isImageCountValid) {
+      alert(`โปรดเลือกรูปภาพ ${galleryTemplate.imgListCount} รูป สำหรับเทมเพลตนี้`);
+      return;
+    }
     if (selectedImages.length > 0) {
       const imageUploadPromises = selectedImages.slice(0, imageCount).map(async (imageSrc) => {
         const response = await fetch(imageSrc);
@@ -102,18 +130,18 @@ const SelectTem: React.FC = () => {
         return uploadImage(blob); // สมมติว่าฟังก์ชันนี้อัพโหลดรูปภาพและส่งคืน ID หรือ URL
       });
 
+      let imageIDs = await Promise.all(imageUploadPromises);
       try {
-        const imageIDs = await Promise.all(imageUploadPromises);
-        console.log('Uploaded Image IDs:', imageIDs);
-
         // Now, construct your complete request body with the image IDs and other info
+        imageIDs = await Promise.all(imageUploadPromises);
+
         const requestBody = {
           name: userInfo.name,
           caption: userInfo.caption,
           facebook: userInfo.facebook,
           instagram: userInfo.instagram,
           line: userInfo.line,
-          galleryTemplate: galleryTemplate,
+          galleryTemplate: galleryTemplate?.tem,
           selectedImages: imageIDs.map((id, index) => ({ number: index + 1, src: id })),
           // Assume your payment info is static or gathered from elsewhere
           payment: { amount: 29, status: 'Pending' },
@@ -131,7 +159,11 @@ const SelectTem: React.FC = () => {
         router.push('/payment'); // นำทางไปยังหน้า /payment
 
       } catch (error) {
-        console.error('Error uploading images or submitting form:', error);
+        console.error('Error during form submission or image upload:', error);
+        // Attempt to delete uploaded images
+        const validImageIDs = imageIDs.filter((id): id is string => id !== null);
+        await Promise.all(validImageIDs.map(deleteImage));
+        // Handle failure (e.g., show an error message)
       }
     } else {
       console.log('No images selected for upload.');
@@ -149,7 +181,7 @@ const SelectTem: React.FC = () => {
                 <FaChevronLeft />
               </button>
               <div className="text-center py-2">
-                Tem {galleryTemplate + 1}
+                Tem {galleryTemplate?.tem + 1}
               </div>
               <button onClick={() => navigateTemplate('next')} className="py-2">
                 <FaChevronRight />
@@ -164,7 +196,7 @@ const SelectTem: React.FC = () => {
           <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
             <GalleryIndex
               mode={'edit'}
-              selectTem={galleryTemplate}
+              selectTem={galleryTemplate?.tem}
               selectedImages={selectedImages}
               updateSelectedImages={setSelectedImages}
               updateImageCount={updateImageCount}
@@ -179,3 +211,16 @@ const SelectTem: React.FC = () => {
   );
 }
 export default SelectTem;
+async function deleteImage(imageId: string): Promise<void> {
+  try {
+    // Replace the URL and method as per your backend API's requirement
+    await fetch(`https://your-backend-api.com/images/${imageId}`, { method: 'DELETE' });
+  } catch (error) {
+    console.error("Failed to delete uploaded image:", error);
+  }
+}
+
+async function uploadImage(blob: Blob): Promise<string> {
+  // Implementation of your uploadImage function that returns an image ID
+  return "";
+}

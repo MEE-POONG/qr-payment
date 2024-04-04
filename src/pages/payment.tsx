@@ -77,9 +77,12 @@ const Payment: React.FC = () => {
       setDynamicStyle({ height: 'max-content' });
     }
   }, [isLargeScreen, isLandscape]);
+
   useEffect(() => {
     const fetchProfile = async () => {
       const profileId = localStorage.getItem('profileId');
+      console.log(profileId);
+      
       if (!profileId) {
         router.push('/selecttem');
         return;
