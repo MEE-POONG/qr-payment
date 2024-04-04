@@ -26,6 +26,13 @@ const SelectTem: React.FC = () => {
   const [dynamicStyle, setDynamicStyle] = useState<React.CSSProperties>({});
 
   useEffect(() => {
+    const profileId = localStorage.getItem('profileId');
+    console.log(profileId);
+
+    if (profileId) {
+      router.push('/payment');
+      return;
+    }
     // This function checks if window is defined and then updates state accordingly
     const checkScreenOrientation = () => {
       if (typeof window !== 'undefined') {

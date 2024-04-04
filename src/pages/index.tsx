@@ -82,13 +82,17 @@ const Index: React.FC = () => {
 
   useEffect(() => {
     const fetchProfiles = async () => {
-      const response = await fetch('/api/profiledata/poststory');
+      const response = await fetch('/api/profiledata/poststory/search');
       const data = await response.json();
       setProfiles(data);
     };
 
     fetchProfiles();
   }, []);
+  useEffect(() => {
+    console.log(profiles);
+
+  }, [profiles]);
 
   return (
     <Layout>
@@ -107,7 +111,7 @@ const Index: React.FC = () => {
                 </div>
               </div>
             </div>
-            {profiles.map((profile) => (
+            {profiles?.map((profile) => (
               <div className={`relative aspect-[3/2] `} style={dynamicStyle}>
                 <GalleryIndex
                   mode={'view'}
