@@ -44,6 +44,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'DELETE':
             // ลบ Profile และอาจต้องจัดการกับการลบข้อมูลที่เกี่ยวข้องถ้ามี
             try {
+                await prisma.imageData.deleteMany({
+                    where: { postProfileID: id as string },
+                });
+                await prisma.payment.deleteMany({
+                    where: { postProfileID: id as string },
+                });
+                // จากนั้นจึงลบ ProfileData
+                await prisma.profileData.delete({
+                    where: { id: id as string },
+                });
                 await prisma.profileData.delete({
                     where: { id: id as string },
                 });
