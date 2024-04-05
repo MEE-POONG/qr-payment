@@ -50,10 +50,6 @@ const PaymentList: React.FC = () => {
 
         fetchProfiles();
     }, []);
-    useEffect(() => {
-        console.log(profiles);
-
-    }, [profiles]);
 
     const deleteProfile = async (id: string) => {
         try {
@@ -92,12 +88,13 @@ const PaymentList: React.FC = () => {
                                 {profile?.Payment[0]?.status}
                             </td>
                             <td className="py-3 px-4">
-                                <button
+                                <a
+                                    href={`/dashboard/${profile.id}`}
                                     className="mr-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
-                                    // onClick={() => deleteProfile(profile.id)}
+                                // onClick={() => deleteProfile(profile.id)}
                                 >
                                     ดูข้อมูลตัวอย่าง
-                                </button>
+                                </a>
                                 <button
                                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                     onClick={() => deleteProfile(profile.id)}
