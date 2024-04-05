@@ -1,4 +1,4 @@
-import LayoutAdmin from "@/components/aLayoutAdmin";
+import LayoutAdmin from "@/components/LayoutAdmin";
 import Link from "next/link";
 
 export default function LoginForm() {
