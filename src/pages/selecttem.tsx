@@ -108,7 +108,6 @@ const SelectTem: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(galleryTemplate);
     const isUserInfoValid = Object.values(userInfo).some(value => value.trim().length > 4);
 
     // Check if the number of selected images matches the required number of images for the template
@@ -143,7 +142,6 @@ const SelectTem: React.FC = () => {
           line: userInfo.line,
           galleryTemplate: galleryTemplate?.tem,
           selectedImages: imageIDs.map((id, index) => ({ number: index + 1, src: id })),
-          // Assume your payment info is static or gathered from elsewhere
           payment: { amount: 29, status: 'Pending' },
         };
 
