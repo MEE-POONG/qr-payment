@@ -1,5 +1,4 @@
 import { Sriracha } from 'next/font/google'
-import LogoutButton from './LogoutButton'
 import DarkImageBackground from './BG'
 
 
