@@ -1,8 +1,8 @@
 import React from "react";
 import TabsMenu from "@/components/TabsMenu";
-import Layout from "@/components/layout";
 import PaymentList from "@/components/management/PaymentList";
 import TableCustomerList from "@/components/management/TableCustomerList";
+import LayoutAdmin from "@/components/layoutAdmin";
 
 
 const Dashboard: React.FC = () => {
@@ -22,12 +22,12 @@ const Dashboard: React.FC = () => {
 
 
   return (
-    <Layout>
+    <LayoutAdmin>
       <div className="container mx-auto pt-2">
         <TabsMenu tabs={tabs} />
       </div>
 
-    </Layout>
+    </LayoutAdmin>
   );
 }
 export default Dashboard;
