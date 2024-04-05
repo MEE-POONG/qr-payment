@@ -4,6 +4,7 @@ import GalleryIndex from "@/components/Gallery";
 import { GalleryTemData } from '@/data/gallery';
 import BoxText from '@/components/Gallery/BoxText';
 import Layout from '@/components/layout';
+import { FaArrowLeft } from 'react-icons/fa';
 
 interface ImageData {
     id: string;
@@ -97,7 +98,10 @@ const ListPage: React.FC = () => {
 
     return (
         <Layout>
-            <div className='m-auto flex h-full flex-wrap lg:flex-nowrap justify-center '>
+            <div className='relative m-auto flex h-full flex-wrap lg:flex-nowrap justify-center '>
+                <a href='/dashboard' className='absolute p-2 m-4 bg-white rounded-lg left-0'>
+                    <FaArrowLeft className='text-green-500 hover:text-green-800'/>
+                </a>
                 <div className='w-full h-max md:max-md:h-screen lg:h-screen py-2 px-1 md:max-md:w-[70%] lg:w-[70%] flex justify-center' >
                     {profile && (
                         <div className={`relative aspect-[3/2] `} style={dynamicStyle}>

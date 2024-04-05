@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 
 interface ImageData {
@@ -36,6 +37,7 @@ interface Profile {
 }
 
 const PaymentList: React.FC = () => {
+    const router = useRouter();
     const [profiles, setProfiles] = useState<Profile[]>([]);
 
     useEffect(() => {
@@ -54,7 +56,7 @@ const PaymentList: React.FC = () => {
     const deleteProfile = async (id: string) => {
         try {
             await axios.delete(`/api/profiledata/poststory/${id}`);
-            setProfiles(profiles.filter((profile) => profile.id !== id));
+            router.replace(`/dashboard`);
         } catch (error) {
             console.error("Error deleting profile:", error);
         }
