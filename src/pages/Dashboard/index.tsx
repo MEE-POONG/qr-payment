@@ -2,7 +2,7 @@ import React from "react";
 import TabsMenu from "@/components/TabsMenu";
 import PaymentList from "@/components/management/PaymentList";
 import TableCustomerList from "@/components/management/TableCustomerList";
-import LayoutAdmin from "@/components/layoutAdmin";
+import LayoutAdmin from "@/components/aLayoutAdmin";
 
 
 const Dashboard: React.FC = () => {

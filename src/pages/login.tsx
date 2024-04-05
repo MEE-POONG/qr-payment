@@ -1,9 +1,9 @@
-import Layout from "@/components/layout";
+import LayoutAdmin from "@/components/aLayoutAdmin";
 import Link from "next/link";
 
 export default function LoginForm() {
     return (
-        <Layout>
+        <LayoutAdmin>
             <div className="flex justify-center md:items-center md:p-24">
                 <div className="bg-white p-7 max-w-md mx-auto rounded-md relative mt-20  shadow-md " >
                     <div className="bg-white rounded-md overflow-hidden w-20 h-20 absolute -top-10 shadow-md ">
@@ -20,6 +20,6 @@ export default function LoginForm() {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </LayoutAdmin>
     )
 }
