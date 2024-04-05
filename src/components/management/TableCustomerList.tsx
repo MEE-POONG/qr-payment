@@ -1,5 +1,7 @@
+import React from 'react';
 
 const TableCustomerList: React.FC = () => {
+
     return (
         <>
             <div className="overflow-x-auto">
@@ -8,14 +10,18 @@ const TableCustomerList: React.FC = () => {
                         <tr className="bg-purple-500 text-gray-50">
                             <th className="py-3 px-4 text-left">No.</th>
                             <th className="py-3 px-4 text-left">Customer</th>
-                            <th className="py-3 px-4 text-left">IG Name</th>
+                            <th className="py-3 px-4 text-left">Facebook</th>
+                            <th className="py-3 px-4 text-left">IG</th>
+                            <th className="py-3 px-4 text-left">Line</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className="border-b border-blue-gray-200 hover:bg-purple-50">
                             <td className="py-3 px-4 ">1</td>
                             <td className="py-3 px-4">Malcolm Lockyer</td>
+                            <td className="py-3 px-4">f</td>
                             <td className="py-3 px-4">IG</td>
+                            <td className="py-3 px-4">l</td>
                         </tr>
                         <tr className="border-b border-blue-gray-200 hover:bg-purple-50">
                             <td className="py-3 px-4">2</td>
