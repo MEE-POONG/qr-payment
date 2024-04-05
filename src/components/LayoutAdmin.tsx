@@ -1,19 +1,13 @@
-import { Sriracha } from 'next/font/google'
-import DarkImageBackground from './BG'
+import React, { ReactNode } from 'react';
+import DarkImageBackground from './BG';
+
+interface LayoutAdminProps {
+  children: ReactNode;
+}
+
+const LayoutAdmin: React.FC<LayoutAdminProps> = ({ children }) => {
 
 
-
-export const sriracha = Sriracha({
-  weight: '400',
-  subsets: ['latin'],
-})
-
-
-export default function LayoutAdmin({
-  children,
-}: {
-  children: React.ReactNode
-}) {
   return (
     <section>
       {/* <LogoutButton /> */}
@@ -24,3 +18,4 @@ export default function LayoutAdmin({
     </section>
   )
 }
+export default LayoutAdmin;
